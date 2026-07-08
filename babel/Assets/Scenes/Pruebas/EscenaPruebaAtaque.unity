@@ -587,8 +587,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Peephole: {fileID: 1426480988}
   MeleWeapon: {fileID: 866148002}
-  MeleDuration: 4
-  MeleColdown: 1
+  MeleDuration: 0.5
+  MeleCooldown: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

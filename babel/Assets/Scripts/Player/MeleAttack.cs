@@ -114,24 +114,10 @@ public class MeleAttack : MonoBehaviour
         PeepholeUpdate();
         if (_canAttack)
         {
-            if (!_isAttaking && InputManager.Instance.AttackWasPressedThisFrame() && MeleCooldown < Time.time - _AttackFinishTime)
+            if (MeleCooldown < Time.time - _AttackFinishTime)
             {
                 Atack();
-                _isAttaking = true;
-                _AttackStartTime = Time.time;
-            }
-            else if (_isAttaking)
-            {
-                if (MeleDuration < Time.time - _AttackStartTime)
-                {
-                    _AttackFinishTime = Time.time;
-                    _isAttaking = false;
-                    MeleWeapon.SetActive(false);
-                }
-                else
-                {
-                    Atack();
-                }
+
             }
         }
     }
@@ -173,10 +159,23 @@ public class MeleAttack : MonoBehaviour
     {
         //Miramos la direccion que queremos atacar
         _dir = Input.mousePosition;
+        //Metodo a revisar para que quede mejor a futuro
         int Quadrant = GetQuadrant(_dir);
         //Debug.Log(Quadrant);
-        //Generamos el ataque en la dirección 
-        GenerateWeapon(Quadrant);
+        //Generamos el ataque en la dirección
+        if (!_isAttaking && InputManager.Instance.AttackWasPressedThisFrame())
+        {
+            _isAttaking = true;
+            _AttackStartTime = Time.time;
+            GenerateWeapon(Quadrant);
+        }
+        else if (_isAttaking && MeleDuration < Time.time - _AttackStartTime)
+        {
+            _AttackFinishTime = Time.time;
+            _isAttaking = false;
+            MeleWeapon.SetActive(false);
+        }
+
     }
     /// <summary>
     /// Metodo que representa y coloca el arma en la posicion correspondiente con el jugador
@@ -190,13 +189,13 @@ public class MeleAttack : MonoBehaviour
         switch (Quadrant)
         {
             case 1: tranform.y++; Rotation = Quaternion.Euler(0, 0, 0); break;
-            case 2: tranform.y+=0.5f; tranform.x-= 0.5f; Rotation = Quaternion.Euler(0, 0, 45); break;
+            case 2: tranform.y += 0.5f; tranform.x -= 0.5f; Rotation = Quaternion.Euler(0, 0, 45); break;
             case 3: tranform.x--; Rotation = Quaternion.Euler(0, 0, 90); break;
-            case 4: tranform.y-=0.5f; tranform.x-=0.5f; Rotation = Quaternion.Euler(0, 0, 135); break;
+            case 4: tranform.y -= 0.5f; tranform.x -= 0.5f; Rotation = Quaternion.Euler(0, 0, 135); break;
             case 5: tranform.y--; Rotation = Quaternion.Euler(0, 0, 180); break;
-            case 6: tranform.y-=0.5f; tranform.x+=0.5f; Rotation = Quaternion.Euler(0, 0, -135); break;
+            case 6: tranform.y -= 0.5f; tranform.x += 0.5f; Rotation = Quaternion.Euler(0, 0, -135); break;
             case 7: tranform.x++; Rotation = Quaternion.Euler(0, 0, -90); break;
-            case 8: tranform.y+=0.5f; tranform.x+=0.5f; Rotation = Quaternion.Euler(0, 0, -45); break;
+            case 8: tranform.y += 0.5f; tranform.x += 0.5f; Rotation = Quaternion.Euler(0, 0, -45); break;
 
 
         }
