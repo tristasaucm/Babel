@@ -22,10 +22,7 @@ public class MeleAttack : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    /// <summary>
-    /// GameObject del Puntero 
-    /// </summary>
-    [SerializeField] private GameObject Peephole;
+    
     /// <summary>
     /// GameObject del arma mele
     /// </summary>
@@ -49,14 +46,6 @@ public class MeleAttack : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
     /// <summary>
-    /// Posccion del puntero 
-    /// </summary>
-    private Vector2 _peepholePosition;
-    /// <summary>
-    /// El transform del puntero
-    /// </summary>
-    private Transform _tranformPeephole;
-    /// <summary>
     /// El transform del arma
     /// </summary>
     private Transform _transformWeapon;
@@ -73,16 +62,18 @@ public class MeleAttack : MonoBehaviour
     /// </summary>
     private Vector2 _dir;
     /// <summary>
-    /// Tiempo en el que se ha desactivado el sprint
+    /// Tiempo en el que se ha desactivado el ataque
     /// </summary>
     private float _AttackFinishTime;
     /// <summary>
-    /// Tiempo en el que se ha activado el sprint
+    /// Tiempo en el que se ha activado el ataque
     /// </summary>
     private float _AttackStartTime;
     /// <summary>
-    /// bool que indica si el sprint esta activo
+    /// Bool que indica si estamos usando el arma mele
     /// </summary>
+    private bool _isUsingMele;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -98,7 +89,6 @@ public class MeleAttack : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _tranformPeephole = Peephole.GetComponent<Transform>();
         _transformWeapon = MeleWeapon.GetComponent<Transform>();
         _isAttaking = false;
         _canAttack = true;
@@ -111,8 +101,7 @@ public class MeleAttack : MonoBehaviour
     /// </summary>
     void Update()
     {
-        PeepholeUpdate();
-        if (_canAttack)
+        if (_canAttack &&  _isUsingMele)
         {
             if (MeleCooldown < Time.time - _AttackFinishTime)
             {
@@ -130,7 +119,10 @@ public class MeleAttack : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
+    public void ActivateDesactivateMele(bool status)
+    {
+        _isUsingMele = status;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -139,22 +131,6 @@ public class MeleAttack : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    /// <summary>
-    /// Actualiza la posición del puntero en el mundo
-    /// </summary>
-    private void PeepholeUpdate()
-    {
-        //Miramos posicion del mouse
-        _peepholePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Por si hay problemas de donde se encuentra
-        //Debug.Log(_cursorPosition.x);
-        //Debug.Log(_cursorPosition.y);
-        //Ponemos la mira en la posicion obtenida
-        _tranformPeephole.position = _peepholePosition;
-    }
-    /// <summary>
-    /// Activa el ataque del Jugador
-    /// </summary>
     private void Atack()
     {
         //Miramos la direccion que queremos atacar

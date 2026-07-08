@@ -73,6 +73,10 @@ public class InputManager : MonoBehaviour
     /// Acción para atacar
     /// </summary>
     private InputAction _Attack;
+    /// <summary>
+    /// Acccion para cambiar de arma
+    /// </summary>
+    private InputAction _ChangeWeapon;
 
     #endregion
 
@@ -257,6 +261,38 @@ public class InputManager : MonoBehaviour
     {
         return _Attack.WasReleasedThisFrame();
     }
+    /// <summary>
+    /// Método para saber si el botón de interacion está pulsado
+    /// Devolverá true en todos los frames en los que se mantenga pulsado
+    /// <returns>True, si el botón está pulsado</returns>
+    /// </summary>
+    public bool ChangeWeaponIsPressed()
+    {
+        return _ChangeWeapon.IsPressed();
+    }
+
+    /// <summary>
+    /// Método para saber si el botón de interacion se ha pulsado en este frame
+    /// <returns>Devuelve true, si el botón ha sido pulsado en este frame
+    /// y false, en otro caso
+    /// </returns>
+    /// </summary>
+    public bool ChangeWeaponWasPressedThisFrame()
+    {
+        return _ChangeWeapon.WasPressedThisFrame();
+    }
+
+    /// <summary>
+    /// Método para saber si el botón de interacion ha dejado de pulsarse
+    /// durante este frame
+    /// <returns>Devuelve true, si el botón se ha dejado de pulsar en
+    /// este frame; y false, en otro caso.
+    /// </returns>
+    /// </summary>
+    public bool ChangeWeaponWasReleasedThisFrame()
+    {
+        return _ChangeWeapon.WasReleasedThisFrame();
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -286,6 +322,7 @@ public class InputManager : MonoBehaviour
         _fire = _theController.Player.Fire;
         _Interaction = _theController.Player.Interacion;
         _Attack = _theController.Player.Attack;
+        _ChangeWeapon = _theController.Player.WeaponChange;
     }
 
     /// <summary>
