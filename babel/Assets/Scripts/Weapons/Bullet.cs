@@ -22,11 +22,18 @@ public class Bullet : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+    /// <summary>
+    /// Daño de la bala
+    /// </summary>
     [SerializeField] private int Damage;
+    /// <summary>
+    /// Velocidad de la bala
+    /// </summary>
     [SerializeField] private float Speed;
+    //Distancia maxima 
     [SerializeField] private float Maxdistance;
+    //Arma que lo dispara
     [SerializeField] private GameObject Shoter;
-    [SerializeField] private GameObject Proyectile;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -37,9 +44,21 @@ public class Bullet : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    private EnemiesHealth _enemieHealth;
+    /// <summary>
+    /// script de vida
+    /// </summary>
+    private UniversalHealth _enemieHealth;
+    /// <summary>
+    /// ha sido disparado
+    /// </summary>
     private bool _hasbeenShoot;
+    /// <summary>
+    /// posicion inicial de la bala
+    /// </summary>
     private Vector3 _inicialPos;
+    /// <summary>
+    /// Ataque a distancia
+    /// </summary>
     private ShootAttack _shootAttack;
 
     #endregion
@@ -57,6 +76,7 @@ public class Bullet : MonoBehaviour
     /// </summary>
     void Start()
     {
+        //conseguimos el componente del disparo
         _shootAttack = Shoter.GetComponent<ShootAttack>();
     }
 
@@ -65,13 +85,14 @@ public class Bullet : MonoBehaviour
     /// </summary>
     void Update()
     {
+        //Miramos si ha sido disparado
         if (_hasbeenShoot)
         {
            this.transform.position += transform.right* Speed *Time.deltaTime;
             if (Maxdistance < Vector3.Distance(_inicialPos,this.transform.position) )
             {
-                Debug.Log("llego al maximo");
-                Proyectile.SetActive(false);
+               // Debug.Log("llego al maximo");
+                this.gameObject.SetActive(false);
                 _shootAttack.HasFinishAttack();
             }
             
@@ -89,10 +110,11 @@ public class Bullet : MonoBehaviour
     /// <summary>
     /// Metodo que prepara el proyectil y lo lanza
     /// </summary>
-    /// <param name="point"></param>
+    /// <param name="point"> punto de llegada</param>
+    /// <param name="PlayerPos">punto de partida</param>
     public void Shoot(Vector3 point,Vector3 PlayerPos)
     {
-
+       // Debug.Log("¡¡¡BULLET SHOOT!!!");
         this.transform.position = PlayerPos;
         Vector2 dir = point - this.transform.position;
         float AnguloZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -110,10 +132,37 @@ public class Bullet : MonoBehaviour
     // mayúscula, incluida la primera letra)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _enemieHealth = collision.GetComponent<EnemiesHealth>();
-        if(_enemieHealth != null)
+        //Miramos si es un enemigo o un player y dependiendo de que seamos le hacemos daño o no
+        if (!collision.isTrigger)
         {
-            _enemieHealth.GetDamage(Damage);
+            _enemieHealth = collision.GetComponent<UniversalHealth>();
+            //miramos si tiene vida
+            if (_enemieHealth != null)
+            {
+                if (_enemieHealth.IsPlayer())
+                {
+                    //Debug.Log("player");
+                    if (_shootAttack.IsUsedByEnemie())
+                    {
+                        _enemieHealth.GetDamage(Damage);
+                        _shootAttack.HasFinishAttack();
+                    }
+                }
+                else
+                {
+                   // Debug.Log("Enemie");
+                    if (!_shootAttack.IsUsedByEnemie())
+                    {
+                        //Debug.Log("dañando enemigo");
+                        _enemieHealth.GetDamage(Damage);
+                        _shootAttack.HasFinishAttack();
+                    }
+
+                }
+            }
+      
+            
+                
         }
     }
     #endregion   

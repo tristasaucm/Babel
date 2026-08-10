@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -13,7 +14,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class EnemiesHealth : MonoBehaviour
+public class Pickable : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -22,17 +23,11 @@ public class EnemiesHealth : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    /// <summary>
-    /// Vida del enemigo
-    /// </summary>
-    [SerializeField] private int Health;
-    /// <summary>
-    /// GameOBject propio para luego poder ser desactivado
-    /// </summary>
-    [SerializeField] private GameObject OwnEnemie;
-
+   
+    [SerializeField] Type Objeto;
+    [SerializeField] Image Icon;
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -41,16 +36,16 @@ public class EnemiesHealth : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
+    private enum Type { ability, weapon, quest }
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
@@ -65,7 +60,7 @@ public class EnemiesHealth : MonoBehaviour
     /// </summary>
     void Update()
     {
-        DidIDie();
+        
     }
     #endregion
 
@@ -76,13 +71,10 @@ public class EnemiesHealth : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-    public void GetDamage(int damage)
+    public string GetType()
     {
-        Health -= damage;
-    }
-    public void RegenHealth(int regen)
-    {
-        Health += regen;
+        string type = Objeto.ToString();
+        return type;
     }
     #endregion
     
@@ -92,14 +84,8 @@ public class EnemiesHealth : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    private void DidIDie()
-    {
-        if(Health <= 0)
-        {
-            OwnEnemie.SetActive(false);
-        }
-    }
+
     #endregion   
 
-} // class EnemiesHealth 
+} // class pickable 
 // namespace

@@ -64,11 +64,11 @@ public class Interactive : MonoBehaviour
         {
             if (SoltarLibro())
             {
-                _player.CambiaLibros(1);
+               
             }
             else if (PonLibro())
             {
-                _player.CambiaLibros(-1);
+                
             }
         }
     }

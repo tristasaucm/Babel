@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Velocidad a la que se deplaza el personaje
     /// </summary>
-    [SerializeField] private int Speed;
+    [SerializeField] private float Speed;
     /// <summary>
     /// Boleano que decide si el jugador puede usar el sprint o no 
     /// </summary>
@@ -50,13 +50,9 @@ public class PlayerMovement : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
     /// <summary>
-    /// Numero de libros que lleva el jugador
-    /// </summary>
-    private int _libros;
-    /// <summary>
     /// Velocidad cuando no esta activo el sprint
     /// </summary>
-    private int _inicialSpeed;
+    private float _inicialSpeed;
     /// <summary>
     /// Tiempo en el que se ha desactivado el sprint
     /// </summary>
@@ -73,6 +69,18 @@ public class PlayerMovement : MonoBehaviour
     /// bool que indica si el movimiento esta activo
     /// </summary>
     private bool _movementActive;
+    /// <summary>
+    /// float que es el numero de energia que queda
+    /// </summary>
+    private float _energy;
+    /// <summary>
+    /// bool que indica si se ha terminado el coldown
+    /// </summary>
+    private bool _finishCooldown;
+    /// <summary>
+    /// Rigidbody del player
+    /// </summary>
+    private Rigidbody2D _rb;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -88,33 +96,48 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _libros = 0;
+        //Inicializacion de variables
         _inicialSpeed = Speed;
         _sprintFinishTime = 0;
         _sprintStartTime = 0;
         _sprintActive = false;
         _movementActive = true;
+        _finishCooldown = true;
+        _rb = this.GetComponent<Rigidbody2D>();
+        if(_rb == null)
+        {
+            Debug.Log("No hay rigidbody por tanto no se puede mover");
+        }
     }
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
     void Update()
     {
-        Vector2 dir = InputManager.Instance.MovementVector;
-        //Movimiento
-        if (_movementActive)
+       
+        //presiono tecla sprint si no esta activo 
+        if (InputManager.Instance.FireWasPressedThisFrame() && !_sprintActive)
         {
-            Movement(dir);
-        }
-        if (InputManager.Instance.FireWasPressedThisFrame())
-        {
+            Debug.Log("pulsado");
             ChangeModeSpeed();
         }
         if (Time.time - _sprintStartTime > SprintDuration && _sprintActive)
         {
             ChangeModeSpeed();
-            _sprintActive = false;
         }
+    }
+    private void FixedUpdate()
+    {
+        Vector2 dir = InputManager.Instance.MovementVector;
+        if (_movementActive)
+        {
+            Movement(dir);
+        }
+        else
+        {
+            _rb.linearVelocity = new Vector2(0, 0);
+        }
+
     }
 
     #endregion
@@ -126,14 +149,37 @@ public class PlayerMovement : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-    public void CambiaLibros(int num)
+    /// <summary>
+    /// Metodo que desactiva el movimiento
+    /// </summary>
+    public void ActivateDesactivateMovement(bool next)
     {
-        _libros += num;
+        _movementActive = next;
+       
     }
-    public void ActivateDesactivateMovement()
+    /// <summary>
+    /// Metodo que se encarga de saber cuanta energia queda
+    /// </summary>
+    /// <returns> La energia del jugador </returns>
+    public float GetEnergy()
     {
-        _movementActive = !_movementActive;
+        if (_sprintActive)
+        {
+            _energy = SprintDuration - (Time.time - _sprintStartTime);
+            _energy /= SprintDuration;
+        }else if(Time.time - _sprintFinishTime < CooldownSprint && _sprintFinishTime != 0)
+        {
+            _energy = (Time.time - _sprintFinishTime);
+            _energy /= CooldownSprint;
+        }
+        else
+        {
+            _energy = 1f;
+        }
+            
+        return _energy;
     }
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -142,43 +188,42 @@ public class PlayerMovement : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+    /// <summary>
+    /// Metodo encargado de poner el sprint si se debe
+    /// </summary>
     private void ChangeModeSpeed()
     {
-        if (Speed == _inicialSpeed && (Time.time - _sprintFinishTime > CooldownSprint || _sprintFinishTime == 0))
+
+        _finishCooldown = Time.time - _sprintFinishTime > CooldownSprint || _sprintFinishTime == 0;
+        if (_finishCooldown)
+        {
+            //Debug.Log("coldown termindo");
+            _sprintActive = false;
+        }
+        if (Speed == _inicialSpeed && _finishCooldown)
         {
             //Debug.Log("pone sprint");
             Speed = Sprint;
             _sprintStartTime = Time.time;
             _sprintActive = true;
-
         }
         else
         {
-            //Debug.Log("desactiva sprint");
-            Speed = _inicialSpeed;
-            _sprintFinishTime = Time.time;
+            if(Speed != _inicialSpeed)
+            {
+                Speed = _inicialSpeed;
+                _sprintFinishTime = Time.time;
+            }
         }
     }
-    //Metodo encargado del movimiento del jugador
+    /// <summary>
+    /// Metodo encargado del movimiento del jugador
+    /// </summary>
+    /// <param name="dir">direcion del movimiento </param>
     private void Movement(Vector2 dir)
     {
+        _rb.linearVelocity = dir * Speed;
 
-        if (dir.x < 0)
-        {
-            transform.position += new Vector3(Speed * dir.x * Time.deltaTime, 0, 0);
-        }
-        else if (dir.x > 0)
-        {
-            transform.position += new Vector3(Speed * dir.x * Time.deltaTime, 0, 0);
-        }
-        if (dir.y < 0)
-        {
-            transform.position += new Vector3(0, Speed * dir.y * Time.deltaTime, 0);
-        }
-        if (dir.y > 0)
-        {
-            transform.position += new Vector3(0, Speed * dir.y * Time.deltaTime, 0);
-        }
     }
     #endregion
 

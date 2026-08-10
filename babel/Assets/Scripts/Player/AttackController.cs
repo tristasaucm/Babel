@@ -22,7 +22,18 @@ public class AttackController : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField] private GameObject Attacker;
+    /// <summary>
+    /// Arma a distancia
+    /// </summary>
+    [SerializeField] GameObject RangeWeapon = null;
+    /// <summary>
+    /// Mirilla del jugador
+    /// </summary>
+    [SerializeField] GameObject Peephole;
+    /// <summary>
+    /// Player
+    /// </summary>
+    [SerializeField] GameObject Player;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -33,10 +44,38 @@ public class AttackController : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+    /// <summary>
+    /// Script de mele
+    /// </summary>
     private MeleAttack _mele;
+    /// <summary>
+    /// Script de shoot
+    /// </summary>
     private ShootAttack _shoot;
+    /// <summary>
+    /// bool que indica si puedes atacar
+    /// </summary>
     private bool _canAttack;
+    /// <summary>
+    /// bool que indica si tienes arma
+    /// </summary>
     private bool Weapon;
+    /// <summary>
+    /// bool que indica si puedes recoger el arma
+    /// </summary>
+    private bool _canPickRange;
+    /// <summary>
+    /// tarnsform del arma a distancia
+    /// </summary>
+    private Transform _rangeTransform;
+    /// <summary>
+    /// Posible arma a distancia
+    /// </summary>
+    private GameObject _posibleRange;
+    /// <summary>
+    /// bool que indica si no tenemos arma
+    /// </summary>
+    private bool _noWeapons;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -52,11 +91,24 @@ public class AttackController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _mele =Attacker.GetComponent<MeleAttack>();
-        _shoot = Attacker.GetComponent<ShootAttack>();
+        //Inicializacion y comprobaciones 
+        _mele =GetComponent<MeleAttack>();
+        if(RangeWeapon!= null)
+        {
+            _shoot = RangeWeapon.GetComponent<ShootAttack>();
+           
+            Weapon = true;
+            ChangeWeapon();
+        }
         _canAttack = true;
-        Weapon = true;
-        ChangeWeapon();
+        if(!_mele.HasMele() && !_shoot)
+        {
+            _noWeapons = true;
+        }
+        else
+        {
+            _noWeapons = false;
+        }
     }
 
     /// <summary>
@@ -64,13 +116,39 @@ public class AttackController : MonoBehaviour
     /// </summary>
     void Update()
     {
+        //Miramos si podemos atacar y si podemos cambiar de arma
         if (_canAttack)
         {
-            if (InputManager.Instance.ChangeWeaponWasReleasedThisFrame())
+            //Añadir que no se pueda cambiar si atacamos con mele 
+            if (InputManager.Instance.ChangeWeaponWasPressedThisFrame())
             {
-                Weapon = !Weapon;
-                ChangeWeapon();
+                if (RangeWeapon != null)
+                {
+                    Debug.Log("cambiando de arma");
+                    Weapon = !Weapon;
+                    ChangeWeapon();
+                }
             }
+            //Miramos si podemos equipar armas
+            EquipRangeWeapon();
+            if (_noWeapons)
+            {
+                if (RangeWeapon && !_mele.HasMele())
+                {
+                    Weapon = false;
+                    _shoot.ActivateDesactivateShoot(true);
+                    _shoot.SetEnemyWeapon(false);
+                    RangeWeapon.SetActive(true);
+                    _noWeapons = false;
+                }
+                if (!RangeWeapon && _mele.HasMele())
+                {
+                    Weapon = true;
+                    _mele.ActivateDesactivateMele(true);
+                    _noWeapons = false;
+                }
+            }
+           
         }
     }
     #endregion
@@ -82,7 +160,21 @@ public class AttackController : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
+    /// <summary>
+    /// Metodo para soltar las armas que tenemos 
+    /// </summary>
+    public void DropWeapons()
+    {
+        _mele.DropWeapons();
+        if(RangeWeapon != null)
+        {
+            _rangeTransform.position = this.transform.position;
+            RangeWeapon.SetActive(true);
+            _shoot.ActivateDesactivateShoot(false);
+            RangeWeapon = null;
+        }
+        
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -91,20 +183,84 @@ public class AttackController : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+    /// <summary>
+    /// Metodo encargado de cambiar de arma
+    /// </summary>
     private void ChangeWeapon()
     {
-        if (Weapon)
-        {
-            _mele.ActivateDesactivateMele(true);
-            _shoot.ActivateDesactivateShoot(false);
-        }
-        else
-        {
-            _shoot.ActivateDesactivateShoot(true);
-            _mele.ActivateDesactivateMele(false);
-        }
+       
+            if (Weapon && _mele.HasMele())
+            {
+                _mele.ActivateDesactivateMele(true);
+                _shoot.ActivateDesactivateShoot(false);
+                RangeWeapon.SetActive(false);
+             }
+            else if (RangeWeapon != null)
+            {
+                 Debug.Log("disparo Activado");            
+                _shoot.ActivateDesactivateShoot(true);
+                RangeWeapon.SetActive(true);
+                _mele.ActivateDesactivateMele(false);
+            }
+        
 
     }
+    /// <summary>
+    /// Metodo encargado de equipar arma a distancia
+    /// </summary>
+    private void EquipRangeWeapon()
+    {
+        //Entrar en el collider de una arma
+        //Pulsar la tecla de interactuar
+        if (_canPickRange && InputManager.Instance.InteracWasPressedThisFrame())
+        {
+            //Quitamos la antigua arma si tenemos
+            if (RangeWeapon != null)
+            {
+                Debug.Log("dejando antigua arma a distancia");
+                _rangeTransform.position = this.transform.position;
+                _shoot.ActivateDesactivateShoot(false);
+                RangeWeapon.SetActive(true);
+                RangeWeapon = null;
+            }
+            //establecer como arma la recogida
+            RangeWeapon = _posibleRange;
+            _canPickRange = false;
+            //Desactivar el arma recogida
+            _rangeTransform = RangeWeapon.GetComponent<Transform>();
+            _shoot = RangeWeapon.GetComponent<ShootAttack>();
+            _shoot.ActivateDesactivateShoot(true);
+            _shoot.PlayerConfig(Peephole, Player);
+            RangeWeapon.SetActive(false);
+            Debug.Log("Arma Cambiada");
+            //Añadir que se ponga el arma cogida solo si no estamos atacando
+            ChangeWeapon();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //miramos si es un arma a distancia para cogerla
+        if (collision.GetComponent<ShootAttack>())
+        {
+            _canPickRange = true;
+            _posibleRange = collision.gameObject;
+            //si es la misma no la cogemos
+            if (_posibleRange == RangeWeapon)
+            {
+                _canPickRange = false;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //Si se va ya no la podemos coger
+        if (collision.GetComponent<ShootAttack>())
+        {
+            _canPickRange = false;
+        }
+    }
+
+
     #endregion   
 
 } // class AttackController 

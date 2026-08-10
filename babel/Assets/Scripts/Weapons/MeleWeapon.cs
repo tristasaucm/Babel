@@ -1,11 +1,10 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
-// Nombre del juego
-// Proyectos 1 - Curso 2025-26
+// Codigo encargado de las armas a mele
+// Tristan
 //---------------------------------------------------------
 
 using NUnit.Framework.Internal;
+using UnityEditor;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -40,7 +39,16 @@ public class MeleWeapon : MonoBehaviour
     /// <summary>
     /// variable que contiene el script de vida de los enemigos
     /// </summary>
-    private EnemiesHealth _enemieHealth;
+    private UniversalHealth _enemieHealth;
+    /// <summary>
+    /// bool que indica si esta equipado
+    /// </summary>
+    private bool _equip;
+    /// <summary>
+    /// bool que indica si es un enemigo
+    /// </summary>
+    private bool _enemie;
+ 
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -75,7 +83,16 @@ public class MeleWeapon : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
+    /// <summary>
+    /// metodo para equipar un arma
+    /// </summary>
+    /// <param name="est"> estado de la equipacion</param>
+    /// <param name="enemie"> si es enemigo o no</param>
+    public void Equip(bool est,bool enemie)
+    {
+        _equip = est;
+        _enemie = enemie;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -86,10 +103,18 @@ public class MeleWeapon : MonoBehaviour
     // mayúscula, incluida la primera letra)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _enemieHealth = collision.GetComponent<EnemiesHealth>();
-        if(_enemieHealth != null)
+        //Mira quien ataco para si pueden recivir daño
+        _enemieHealth = collision.GetComponent<UniversalHealth>();
+        if(_enemieHealth != null && _equip)
         {
-            _enemieHealth.GetDamage(Damage);
+            if (_enemieHealth.IsPlayer()&& _enemie)
+            {
+                _enemieHealth.GetDamage(Damage);
+            }
+            else if (!_enemieHealth.IsPlayer() && !_enemie)
+            {
+                _enemieHealth.GetDamage(Damage);
+            }
         }
     }
     #endregion   

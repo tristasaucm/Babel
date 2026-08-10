@@ -5,8 +5,9 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using System.Data;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -23,8 +24,19 @@ public class UIManager : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField] private Slider SprintBar;
+    /// <summary>
+    /// Imagen de la barra de vida
+    /// </summary>
+    [SerializeField] private Image Life;
+    /// <summary>
+    /// Imagen de la barra de energia
+    /// </summary>
+    [SerializeField] private Image Energy;
+    /// <summary>
+    /// Gameobject del player
+    /// </summary>
     [SerializeField] private GameObject Player;
+
 
     #endregion
 
@@ -36,7 +48,18 @@ public class UIManager : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    private PlayerMovement _player;
+    /// <summary>
+    /// Script que lleva el movimiento del jugador
+    /// </summary>
+    private PlayerMovement _playerEnergy;
+    /// <summary>
+    /// Script que lleva la vida del jugador
+    /// </summary>
+    private UniversalHealth _playerHealth;
+    /// <summary>
+    /// float que indica la vida maxima
+    /// </summary>
+    private float _maxHealth;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -52,7 +75,10 @@ public class UIManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _player = Player.GetComponent<PlayerMovement>();
+        //Inicializamos
+        _playerEnergy = Player.GetComponent<PlayerMovement>();
+        _playerHealth = Player.GetComponent<UniversalHealth>();
+        _maxHealth = _playerHealth.GetHealth();
     }
 
     /// <summary>.
@@ -60,7 +86,8 @@ public class UIManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+        //altualizamos el UI
+        UpdateUI();
     }
     #endregion
 
@@ -80,7 +107,17 @@ public class UIManager : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
+    /// <summary>
+    /// Metodo que atualiza el UI
+    /// </summary>
+    private void UpdateUI()
+    {
+       float health = _playerHealth.GetHealth();
+       float energy = _playerEnergy.GetEnergy();
+       Energy.fillAmount = energy;
+        Life.fillAmount = health / _maxHealth;
+       
+    }
     #endregion   
 
 } // class UIManager 

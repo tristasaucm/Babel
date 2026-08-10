@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 // Añadir aquí el resto de directivas using
 
 
@@ -13,7 +14,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class ShootAttack : MonoBehaviour
+public class Collider : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -22,11 +23,6 @@ public class ShootAttack : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-    [SerializeField] private GameObject Proyectile;
-    /// <summary>
-    /// GameObject del Puntero 
-    /// </summary>
-    [SerializeField] private GameObject Peephole;
 
     #endregion
 
@@ -38,35 +34,31 @@ public class ShootAttack : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    private bool _canShoot;
-    private bool _isShooting;
-    private bool _isUsingShoot;
-    private Bullet _bullet;
-    private Transform _peepholeTransform;
+    /// <summary>
+    /// Movimiento del player
+    /// </summary>
+    private PlayerMovement _player;
+    /// <summary>
+    /// bool que indica si el player ha sido detectado
+    /// </summary>
+    private bool _playerDetected;
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
     void Start()
     {
-        _peepholeTransform = Peephole.GetComponent<Transform>();
-        _bullet = Proyectile.GetComponent<Bullet>();
-        _isShooting = false;
-        _canShoot = true;
-        if (!_bullet)
-        {
-            Debug.Log("No hay bala");
-        }
-        Proyectile.SetActive(false);
+        //lo ponemos a false al empezar
+        _playerDetected = false;
     }
 
     /// <summary>
@@ -74,15 +66,7 @@ public class ShootAttack : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_canShoot && _isUsingShoot )
-        {
-            if (!_isShooting && InputManager.Instance.AttackWasPressedThisFrame())
-            {
-                Proyectile.SetActive(true);
-                _bullet.Shoot(_peepholeTransform.position,this.transform.position);
-                _isShooting = true;
-            }
-        }   
+        
     }
     #endregion
 
@@ -93,26 +77,41 @@ public class ShootAttack : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-    public void HasFinishAttack() 
+    /// <summary>
+    /// Metodo que devueve si ha detectado al player
+    /// </summary>
+    /// <returns></returns>
+    public bool GetPlayerDetected()
     {
-        _isShooting = false;
+        return _playerDetected;
     }
-    public void ActivateDesactivateShoot(bool status)
-    {
-        _isUsingShoot = status;
-    }
-
-
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Si es el player lo ponemos que lo hemos detectado
+        _player = collision.GetComponentInParent<PlayerMovement>();
+        if (_player != null)
+        {
+            _playerDetected = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //Si el player se va lo ponemos como que lo hemos perdido
+        _player = collision.GetComponentInParent<PlayerMovement>();
+        if (_player != null)
+        {
+            _playerDetected = false;
+        }
+    }
     #endregion   
 
-} // class ShootAttack 
+} // class Collider 
 // namespace

@@ -28,8 +28,14 @@ public class Dialogs : MonoBehaviour
     /// Array que contiene los textos del npc
     /// </summary>
     [SerializeField] private string[] Texts;
+    /// <summary>
+    /// Sitio para  escribir
+    /// </summary>
     [SerializeField] private TextMeshProUGUI UIText;
-    [SerializeField] private Canvas PanelDialogs;
+    /// <summary>
+    /// Gameobject del panel del texto
+    /// </summary>
+    [SerializeField] private GameObject PanelDialogs;
 
     #endregion
 
@@ -76,11 +82,12 @@ public class Dialogs : MonoBehaviour
     /// </summary>
     void Start()
     {
+        //Inicializacion
         _textLenght = Texts.Length;
         _isTalking = false;
         _canTalk = false;
         _curentText = 0;
-        PanelDialogs.enabled = false;
+        PanelDialogs.SetActive(false);
     }
 
     /// <summary>
@@ -88,6 +95,7 @@ public class Dialogs : MonoBehaviour
     /// </summary>
     void Update()
     {
+        //Miramos si puedes hablar para enmpezar
         if (_canTalk)
         {
             if (!_isTalking)
@@ -95,9 +103,9 @@ public class Dialogs : MonoBehaviour
                 if (InputManager.Instance.InteracWasPressedThisFrame())
                 {
                     _isTalking = true;
-                    PanelDialogs.enabled = true;
+                    PanelDialogs.SetActive(true);
                     //desactivamos movimiento_ 
-                    _playerMovement.ActivateDesactivateMovement();
+                    _playerMovement.ActivateDesactivateMovement(false);
                 }
             }
             else if (_isTalking)
@@ -126,7 +134,8 @@ public class Dialogs : MonoBehaviour
     // mayúscula, incluida la primera letra)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _playerMovement = collision.GetComponent<PlayerMovement>();
+        //Miramos si es el player para ver si puede hablar
+        _playerMovement = collision.GetComponentInParent<PlayerMovement>();
         if (_playerMovement != null)
         {
             _canTalk = true;
@@ -134,7 +143,8 @@ public class Dialogs : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _playerMovement = collision.GetComponent<PlayerMovement>();
+        //Miramos si el player se ha ido
+        _playerMovement = collision.GetComponentInParent<PlayerMovement>();
         if (_playerMovement != null)
         {
             _canTalk = false;
@@ -154,9 +164,9 @@ public class Dialogs : MonoBehaviour
         }
         if (_curentText == _textLenght)
         {
-            PanelDialogs.enabled = false;
+            PanelDialogs.SetActive(false);
             //Activamos el movimiento
-            _playerMovement.ActivateDesactivateMovement();
+            _playerMovement.ActivateDesactivateMovement(true);
             //Reseteamos el texto por si quieres volver a hablar
             _curentText = 0;
             _isTalking = false;
