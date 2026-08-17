@@ -1,0 +1,767 @@
+fileFormatVersion: 2
+guid: a1e52da273cfadc418ac5dce398b7ece
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8632286146988238546
+    second: TilemapCaminos_0
+  - first:
+      213: 6260637411712887563
+    second: TilemapCaminos_1
+  - first:
+      213: -7794987726068987830
+    second: TilemapCaminos_2
+  - first:
+      213: -6951272068397198448
+    second: TilemapCaminos_3
+  - first:
+      213: 8574978886029719700
+    second: TilemapCaminos_4
+  - first:
+      213: -2469897211581784864
+    second: TilemapCaminos_5
+  - first:
+      213: 5063120302630434842
+    second: TilemapCaminos_6
+  - first:
+      213: 1684431378717431300
+    second: TilemapCaminos_7
+  - first:
+      213: 180577846746737680
+    second: TilemapCaminos_8
+  - first:
+      213: -3749247651261440250
+    second: TilemapCaminos_9
+  - first:
+      213: -6516219228934744761
+    second: TilemapCaminos_10
+  - first:
+      213: 2191631513319110930
+    second: TilemapCaminos_11
+  - first:
+      213: -8281322949494794438
+    second: TilemapCaminos_12
+  - first:
+      213: 5998244034593661495
+    second: TilemapCaminos_13
+  - first:
+      213: 2512161856550706626
+    second: TilemapCaminos_14
+  - first:
+      213: -2528821526661888393
+    second: TilemapCaminos_15
+  - first:
+      213: 5969051951685184679
+    second: TilemapCaminos_16
+  - first:
+      213: 5595410046422617087
+    second: TilemapCaminos_17
+  - first:
+      213: 553036680774092695
+    second: TilemapCaminos_18
+  - first:
+      213: 2038883162130300663
+    second: TilemapCaminos_19
+  - first:
+      213: -8792552731017471036
+    second: TilemapCaminos_20
+  - first:
+      213: 9168929091937884792
+    second: TilemapCaminos_21
+  - first:
+      213: 1133940899578898508
+    second: TilemapCaminos_22
+  - first:
+      213: -1383992454952305638
+    second: TilemapCaminos_23
+  - first:
+      213: -7046891292811147810
+    second: TilemapCaminos_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TilemapCaminos_0
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 167
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e299d313c75f33880800000000000000
+      internalID: -8632286146988238546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_1
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 167
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0beaa04e8042e650800000000000000
+      internalID: 6260637411712887563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_2
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 167
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a48c02776f3a2d390800000000000000
+      internalID: -7794987726068987830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_3
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 167
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 093171a12ee188f90800000000000000
+      internalID: -6951272068397198448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_4
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 167
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 498b64a5dd1700770800000000000000
+      internalID: 8574978886029719700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_5
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 167
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ec90f7729929bdd0800000000000000
+      internalID: -2469897211581784864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_6
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 132
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a18fa55f611d34640800000000000000
+      internalID: 5063120302630434842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_7
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 132
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40659f81a6d406710800000000000000
+      internalID: 1684431378717431300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_8
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 132
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01ce4a9489a818200800000000000000
+      internalID: 180577846746737680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_9
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 132
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60f1893202ff7fbc0800000000000000
+      internalID: -3749247651261440250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_10
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 132
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74556ccb22db195a0800000000000000
+      internalID: -6516219228934744761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_11
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 132
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 219ffe5ef3d3a6e10800000000000000
+      internalID: 2191631513319110930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_12
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 97
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a37921d57a4d21d80800000000000000
+      internalID: -8281322949494794438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_13
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 97
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 732af0e5b2b0e3350800000000000000
+      internalID: 5998244034593661495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_14
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 97
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cd9df506edfcd220800000000000000
+      internalID: 2512161856550706626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_15
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 97
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77605f24832d7ecd0800000000000000
+      internalID: -2528821526661888393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_16
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 97
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ac2c0aef1556d250800000000000000
+      internalID: 5969051951685184679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_17
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 97
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffb0cad9ac3e6ad40800000000000000
+      internalID: 5595410046422617087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_18
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 62
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7970d495ee7cca700800000000000000
+      internalID: 553036680774092695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_19
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 62
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fe3d49fe619b4c10800000000000000
+      internalID: 2038883162130300663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_20
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 62
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cb10d640e39af580800000000000000
+      internalID: -8792552731017471036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_21
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 62
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87ad3b71e649e3f70800000000000000
+      internalID: 9168929091937884792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_22
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 62
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c48efa38d319cbf00800000000000000
+      internalID: 1133940899578898508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_23
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 62
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1c3fb6e1321bcce0800000000000000
+      internalID: -1383992454952305638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapCaminos_24
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 62
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed5c23984b9643e90800000000000000
+      internalID: -7046891292811147810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: cfd6aa363f7407340a1cc14b54e1829d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TilemapCaminos_0: -8632286146988238546
+      TilemapCaminos_1: 6260637411712887563
+      TilemapCaminos_10: -6516219228934744761
+      TilemapCaminos_11: 2191631513319110930
+      TilemapCaminos_12: -8281322949494794438
+      TilemapCaminos_13: 5998244034593661495
+      TilemapCaminos_14: 2512161856550706626
+      TilemapCaminos_15: -2528821526661888393
+      TilemapCaminos_16: 5969051951685184679
+      TilemapCaminos_17: 5595410046422617087
+      TilemapCaminos_18: 553036680774092695
+      TilemapCaminos_19: 2038883162130300663
+      TilemapCaminos_2: -7794987726068987830
+      TilemapCaminos_20: -8792552731017471036
+      TilemapCaminos_21: 9168929091937884792
+      TilemapCaminos_22: 1133940899578898508
+      TilemapCaminos_23: -1383992454952305638
+      TilemapCaminos_24: -7046891292811147810
+      TilemapCaminos_3: -6951272068397198448
+      TilemapCaminos_4: 8574978886029719700
+      TilemapCaminos_5: -2469897211581784864
+      TilemapCaminos_6: 5063120302630434842
+      TilemapCaminos_7: 1684431378717431300
+      TilemapCaminos_8: 180577846746737680
+      TilemapCaminos_9: -3749247651261440250
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

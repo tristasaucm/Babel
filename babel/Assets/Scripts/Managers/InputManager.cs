@@ -77,6 +77,10 @@ public class InputManager : MonoBehaviour
     /// Acccion para cambiar de arma
     /// </summary>
     private InputAction _ChangeWeapon;
+    /// <summary>
+    /// Accion para salir de un panel
+    /// </summary>
+    private InputAction _Escape;
 
     #endregion
 
@@ -293,6 +297,16 @@ public class InputManager : MonoBehaviour
     {
         return _ChangeWeapon.WasReleasedThisFrame();
     }
+    /// <summary>
+    /// Método para saber si el botón de escape se ha pulsado en este frame
+    /// <returns>Devuelve true, si el botón ha sido pulsado en este frame
+    /// y false, en otro caso
+    /// </returns>
+    /// </summary>
+    public bool EscapeWasPressedThisFrame()
+    {
+        return _Escape.WasPressedThisFrame();
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -323,6 +337,7 @@ public class InputManager : MonoBehaviour
         _Interaction = _theController.Player.Interacion;
         _Attack = _theController.Player.Attack;
         _ChangeWeapon = _theController.Player.WeaponChange;
+        _Escape = _theController.Player.Escape;
     }
 
     /// <summary>
