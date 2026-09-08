@@ -167,7 +167,12 @@ public class InputManager : MonoBehaviour
     /// es un vector normalizado 
     /// </summary>
     public Vector2 MovementVector { get; private set; }
-
+    /// <summary>
+    /// Propiedad para acceder al ultimo vector de movimiento registrado.
+    /// Según está configurado el InputActionController,
+    /// es un vector normalizado 
+    /// </summary>
+    public Vector2 LastMovementVector { get; private set; }
     /// <summary>
     /// Método para saber si el botón de disparo (Fire) está pulsado
     /// Devolverá true en todos los frames en los que se mantenga pulsado
@@ -327,7 +332,9 @@ public class InputManager : MonoBehaviour
         // Para el movimiento, actualizamos el vector de movimiento usando
         // el método OnMove
         movement.performed += OnMove;
+        movement.performed += LastMove;
         movement.canceled += OnMove;
+        
 
         // Para el disparo solo cacheamos la acción de disparo.
         // El estado lo consultaremos a través de los métodos públicos que 
@@ -349,6 +356,25 @@ public class InputManager : MonoBehaviour
     {
         MovementVector = context.ReadValue<Vector2>();
     }
+    /// <summary>
+    /// Método que es llamado por el controlador de input cuando se producen
+    /// eventos de movimiento (relacionados con la acción Move)
+    /// pero este no actualiza su valor si es un vector nulo por tanto
+    /// podemos saber el ultimo movimiento del jugador
+    /// </summary>
+    /// <param name="context">Información sobre el evento de movimiento</param>
+    private void LastMove(InputAction.CallbackContext context) 
+    {
+        Vector2 posibleLastMovement = context.ReadValue<Vector2>();
+        if (posibleLastMovement  != new Vector2(0, 0))
+        {
+            LastMovementVector = posibleLastMovement;
+            //Debug.Log(LastMovementVector);
+        }
+       
+    }
+
+
 
     #endregion
 } // class InputManager 

@@ -1,8 +1,7 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
-// Nombre del juego
-// Proyectos 1 - Curso 2025-26
+// Scritp encargado de la bala y su trayectoria y daño 
+// Tristán Sánchez
+// Babel
 //---------------------------------------------------------
 
 using UnityEngine;
@@ -30,9 +29,13 @@ public class Bullet : MonoBehaviour
     /// Velocidad de la bala
     /// </summary>
     [SerializeField] private float Speed;
-    //Distancia maxima 
+    /// <summary>
+    /// Distancia maxima 
+    /// </summary>
     [SerializeField] private float Maxdistance;
-    //Arma que lo dispara
+    /// <summary>
+    /// Arma que lo dispara
+    /// </summary>
     [SerializeField] private GameObject Shoter;
     #endregion
 
@@ -150,10 +153,10 @@ public class Bullet : MonoBehaviour
                 }
                 else
                 {
-                   // Debug.Log("Enemie");
+                    //Debug.Log("Enemie");
                     if (!_shootAttack.IsUsedByEnemie())
                     {
-                        //Debug.Log("dañando enemigo");
+                      //  Debug.Log("dañando enemigo");
                         _enemieHealth.GetDamage(Damage);
                         _shootAttack.HasFinishAttack();
                     }

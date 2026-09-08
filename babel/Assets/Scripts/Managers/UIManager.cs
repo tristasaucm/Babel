@@ -112,6 +112,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void UpdateUI()
     {
+        //Debug.Log("actualizando");
        float health = _playerHealth.GetHealth();
        float energy = _playerEnergy.GetEnergy();
        Energy.fillAmount = energy;

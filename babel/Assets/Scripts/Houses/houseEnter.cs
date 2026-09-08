@@ -1,11 +1,9 @@
 //---------------------------------------------------------
 // Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
-// Nombre del juego
-// Proyectos 1 - Curso 2025-26
+// Tristan Sanchez
+// Babel
 //---------------------------------------------------------
 
-using System.Drawing;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -14,7 +12,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class EnemiesChase : MonoBehaviour
+public class houseEnter : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -24,17 +22,13 @@ public class EnemiesChase : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
     /// <summary>
-    /// Gameobjetc del player para perseguirlo
+    /// el gameobject del el otro lado al cual vamos a tparnos
     /// </summary>
-    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject houseLink;
     /// <summary>
-    /// Boost de velocidad del enemigo
+    /// el panel de loading para que el jugador no sepa que pasa
     /// </summary>
-    [SerializeField] private float BostSpeed;
-    /// <summary>
-    /// GameObject del collider
-    /// </summary>
-    [SerializeField] private GameObject Collider;
+    [SerializeField] private GameObject PanelLoading;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -46,25 +40,30 @@ public class EnemiesChase : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
     /// <summary>
-    /// componente colllider
+    /// el transform de donde nos tpamos
     /// </summary>
-    private Collider _collider;
+    private Transform _tpTransform;
     /// <summary>
-    /// Movimiento de los enemigos
+    /// Tiempo de espera antes de quitar el panel
     /// </summary>
-    private EnemiesMovement _movement;
+    private float _waitTime;
     /// <summary>
-    /// bool que indica si detecta al player
+    /// Indica si estamos en rango
     /// </summary>
-    private bool _playerDetected;
+    private bool _onReach;
     /// <summary>
-    /// bool que indica si esta persiguiendo al jugador
+    /// el transform del Player;
     /// </summary>
-    private bool _chassing;
+    private Rigidbody2D _playerRb;
     /// <summary>
-    /// componente del rigidbody
+    /// Tiempo en el cual se ha teletransportado
     /// </summary>
-    private Rigidbody2D _rb;
+    private float _startTime;
+    /// <summary>
+    /// Indica si esta en camino
+    /// </summary>
+    private bool _onWay;
+
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -80,61 +79,29 @@ public class EnemiesChase : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //Inicializacion
-        _chassing = false;
-        _playerDetected = false;
-        _collider = Collider.GetComponent<Collider>();
-        if (_collider == null)
-        {
-            Debug.Log("No hay Collider del enemigo por tanto no funcionara");
-        }
-        _movement = this.gameObject.GetComponent<EnemiesMovement>();
-        if(_movement == null)
-        {
-            Debug.Log("No hay movimiento del enemigo por tanto no funcionara");
-        }
-        _chassing = false;
-        _rb = this.GetComponent<Rigidbody2D>();
-        if (_rb == null)
-        {
-            Debug.Log("No hay rigidbody por tanto no se puede mover el enemigo");
-        }
+        _tpTransform = houseLink.GetComponent<Transform>();
+        PanelLoading.SetActive(false);
+        _waitTime = 1f;
     }
 
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
-    void FixedUpdate()
+    void Update()
     {
-        _playerDetected = _collider.GetPlayerDetected();
-        //si ha detectado al player
-        if (_playerDetected&& ! _chassing)
+        if (_onReach)
         {
-            //Debug.Log("detectado");
-            //Desactiva el patron de movimiento 
-            _movement.DesactiveActivate(false);
-            _chassing = true;
-           
+            if (InputManager.Instance.InteracWasPressedThisFrame())
+            {
+                Tp();
+            }
         }
-       else if (_playerDetected && _chassing)
+        if(_onWay&& _waitTime < Time.time - _startTime)
         {
-            //Seguir al player
-            //apuntamos al player
-           // Debug.Log("persiguiendo");
-            Vector3 point = Player.transform.position;
-            Vector2 dir = point - this.transform.position;
-            //Solucionar cuando mas cerca estas mas lento va 
-            _rb.linearVelocity = dir * BostSpeed;
-
+            _onWay = false;
+            PanelLoading.SetActive(false);
         }
-       else  if (!_playerDetected && _chassing)
-        {
-           // Debug.Log("saliendo");
-            //si el player se sale volvemos a activar el movimiento
-            _movement.DesactiveActivate(true);
-            _chassing = false;
-            _rb.linearVelocity = new Vector2(0, 0);
-        }
+        
     }
     #endregion
 
@@ -154,7 +121,32 @@ public class EnemiesChase : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        _playerRb = collision.GetComponentInParent<Rigidbody2D>();
+        if (collision.GetComponentInParent<PlayerMovement>()!= null&& _playerRb)
+        {
+            _onReach = true;
+          
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponentInParent<PlayerMovement>() != null)
+        {
+            _onReach = false;
+        }
+    }
+    private void Tp()
+    {
+        PanelLoading.SetActive(true);
+        Vector3 pos = _tpTransform.position;
+        //pos.y++;
+        _playerRb.position = pos;
+        _startTime = Time.time;
+        _onWay = true;
+    }
     #endregion   
 
-} // class EnemiesChase 
+} // class houseEnter 
 // namespace

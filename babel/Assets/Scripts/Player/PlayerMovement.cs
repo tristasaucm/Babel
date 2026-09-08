@@ -114,7 +114,10 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Update()
     {
-       
+        if (InputManager.Instance.EscapeWasPressedThisFrame())
+        {
+            LevelManager.Instance.ChangeToPause();
+        }
         //presiono tecla sprint si no esta activo 
         if (InputManager.Instance.FireWasPressedThisFrame() && !_sprintActive)
         {

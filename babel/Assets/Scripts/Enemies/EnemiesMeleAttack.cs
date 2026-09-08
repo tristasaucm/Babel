@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using System;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -26,14 +27,6 @@ public class EnemiesMeleAttack : MonoBehaviour
     /// Arma del enemigo
     /// </summary>
     [SerializeField] private GameObject Weapon;
-    /// <summary>
-    /// Coldown del arma 
-    /// </summary>
-    [SerializeField] private int Cooldown;
-    /// <summary>
-    /// Duracion del ataque del arma
-    /// </summary>
-    [SerializeField] private float AttackDuration;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -72,6 +65,14 @@ public class EnemiesMeleAttack : MonoBehaviour
     /// Script del arma a mele
     /// </summary>
     private MeleWeapon _meleWeapon;
+    /// <summary>
+    /// Coldown del arma 
+    /// </summary>
+    private float _cooldown;
+    /// <summary>
+    /// Duracion del ataque del arma
+    /// </summary>
+    private float _attackDuration;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -95,8 +96,10 @@ public class EnemiesMeleAttack : MonoBehaviour
         if (_meleWeapon)
         {
             _meleWeapon.Equip(true, true);
+            _meleWeapon.GetMeleDuration(ref _attackDuration);
+            _meleWeapon.GetMeleCooldown(ref _cooldown);
         }
-        
+
     }
 
     /// <summary>
@@ -107,18 +110,21 @@ public class EnemiesMeleAttack : MonoBehaviour
         //Si le podemos attacar
         if (_attack)
         {
+            Debug.Log("atacando");
             // Apuntamos y activamos
             Weapon.transform.position = this.transform.position;
             Vector3 point = _playerTransform.transform.position;
-            Vector3 dir = point - this.transform.position;
-            Weapon.transform.position += dir;
+            WeaponTransform(point);
+            WeaponOrientation(point);
             //Si el tiempo pasado es mayor que el cooldown
-            if(Time.time -_AttackFinishTime > Cooldown && !_isAttacking)
+            if (Time.time - _AttackFinishTime > _cooldown && !_isAttacking)
             {//Atacamos
+                Debug.Log("sacando espada");
                 Weapon.SetActive(true);
                 _isAttacking = true;
                 _AttackStartTime = Time.time;
-            }else if(_isAttacking && AttackDuration <Time.time -_AttackStartTime)
+            }
+            else if (_isAttacking && _attackDuration < Time.time - _AttackStartTime)
             {
                 //si el tiempo se ha terminado terminamos el ataque
                 _AttackFinishTime = Time.time;
@@ -126,7 +132,7 @@ public class EnemiesMeleAttack : MonoBehaviour
                 _isAttacking = false;
             }
 
-           
+
         }
         if (!_attack)
         {
@@ -168,30 +174,76 @@ public class EnemiesMeleAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ///miramos si es el player para obtener su transform y decir que podemos atacar
-        _healthPlayer = collision.GetComponent<UniversalHealth>();
-        if(_healthPlayer!= null)
+        _healthPlayer = collision.GetComponentInParent<UniversalHealth>();
+        if (_healthPlayer != null)
         {
             if (_healthPlayer.IsPlayer())
             {
                 _attack = true;
                 _playerTransform = collision.GetComponent<Transform>();
             }
-           
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Si el player se va dejamos de poder atacar
-        _healthPlayer = collision.GetComponent<UniversalHealth>();
+        _healthPlayer = collision.GetComponentInParent<UniversalHealth>();
         if (_healthPlayer != null)
         {
             if (_healthPlayer.IsPlayer())
             {
                 _attack = false;
             }
-            
+
         }
     }
+    private void WeaponOrientation(Vector3 point)
+    {
+        Quaternion Rotation = Quaternion.Euler(0, 0, 0);
+        Vector3 own = this.transform.position;
+        Vector3 dir = point - own;
+        //caso esta a la derecha
+        if (dir.x > 0.5)
+        {
+            Rotation = Quaternion.Euler(0, 0, -90);
+            //Caso esta a la izquierda
+        }
+        else if (dir.x < -0.5)
+        {
+            Rotation = Quaternion.Euler(0, 0, 90);
+        }//caso esta debajo
+        else if (dir.y< 0)
+        {
+            Rotation = Quaternion.Euler(0, 0, 180);
+        }
+        Weapon.transform.rotation = Rotation;
+    }
+    private void WeaponTransform(Vector3 point)
+    {
+        Vector3 _Weapon = this.transform.position;
+        Vector3 own = this.transform.position;
+        Vector3 dir = point - own;
+        if (dir.x > 0.5)
+        {
+            _Weapon.x++;
+        }
+        else if (dir.x< -0.5)
+        {
+            _Weapon.x--;
+        }
+        else if (dir.y < 0)
+        {
+            _Weapon.y--; 
+        }
+        else 
+        {
+            _Weapon.y++;
+        }
+        Weapon.transform.position = _Weapon;
+
+    }
+
     #endregion   
 
 } // class EnemiesMeleAttack 

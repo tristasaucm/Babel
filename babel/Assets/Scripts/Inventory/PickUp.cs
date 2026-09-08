@@ -123,7 +123,7 @@ public class PickUp : MonoBehaviour
 
 
         }
-        if(_panelActive && Time.time -_startTime >= DuracionPanel)
+        if (_panelActive && Time.time - _startTime >= DuracionPanel)
         {
             _panelActive = false;
             PanelRecogidos.SetActive(false);
@@ -142,12 +142,19 @@ public class PickUp : MonoBehaviour
     {
         return _currentLastPlace > 0;
     }
-    public void GetInfo(int num,ref int scene,ref string Name)
+    public void GetInfo(ref int num, ref int scene, ref string Name)
     {
-        if(num< _currentLastPlace)
+        if (0 <= num && num <= _currentLastPlace-1)
         {
             scene = _scenes[num];
             Name = _bag[num];
+        }if(num < 0)
+        {
+            num = 0;
+        }
+        else if (num >= _currentLastPlace - 1)
+        {
+            num = _currentLastPlace - 1;
         }
     }
     #endregion

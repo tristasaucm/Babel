@@ -1,6 +1,7 @@
 //---------------------------------------------------------
 // Arvchivo encargado del disparo a distancia del enemigo
 // Tristan
+// Babel
 //---------------------------------------------------------
 
 using UnityEngine;
@@ -88,10 +89,16 @@ public class EnemiesShoot : MonoBehaviour
         //Miramos si podemos atacar y no estamos atacando ya 
         if (_canAttack && !_shoot.IsShooting())
         {
-          //  Debug.Log("EnemiesShoot: llamando a RemoteShoot");
-          //mandamos el disparo al arma
-                _shoot.RemoteShoot();
-            
+            //  Debug.Log("EnemiesShoot: llamando a RemoteShoot");
+            //mandamos el disparo al arma
+            _shoot.RemoteShoot(true);
+
+        }
+        if (!_canAttack && _shoot.IsShooting())
+        {
+            //Des
+            // Debug.Log("quitando disparo");
+            _shoot.RemoteShoot(false);
         }
     }
     #endregion
@@ -128,19 +135,19 @@ public class EnemiesShoot : MonoBehaviour
     // mayúscula, incluida la primera letra)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       // Debug.Log("ENTRA AL TRIGGER: " + collision.gameObject.name);
-       //Miramos si es el player para empezar a disparar
+        // Debug.Log("ENTRA AL TRIGGER: " + collision.gameObject.name);
+        //Miramos si es el player para empezar a disparar
         _enemieHealth = collision.GetComponentInParent<UniversalHealth>();
 
         if (_enemieHealth != null && _enemieHealth.IsPlayer())
         {
-            Debug.Log("PLAYER DETECTADO PARA DISPARAR");
+            // Debug.Log("PLAYER DETECTADO PARA DISPARAR");
 
             _canAttack = true;
         }
         else
         {
-           // Debug.Log("No tiene UniversalHealth o no es Player");
+            // Debug.Log("No tiene UniversalHealth o no es Player");
         }
     }
 
@@ -148,15 +155,15 @@ public class EnemiesShoot : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Si perdemos al player dejamos de disparar
-        _enemieHealth = collision.GetComponent<UniversalHealth>();
+        _enemieHealth = collision.GetComponentInParent<UniversalHealth>();
         if (_enemieHealth != null && _enemieHealth.IsPlayer())
         {
-
+            //Debug.Log("player perdido");
             _canAttack = false;
         }
     }
     #endregion   
 
-} 
+}
 // class EnemiesShoot 
 // namespace

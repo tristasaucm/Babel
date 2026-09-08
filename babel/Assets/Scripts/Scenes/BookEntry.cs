@@ -66,6 +66,10 @@ public class BookEntry : MonoBehaviour
     /// Script para cambiar de escena
     /// </summary>
     private ChangeScene _changeScene;
+    /// <summary>
+    /// lleva el nivel que queremos
+    /// </summary>
+    private int _level;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -96,6 +100,7 @@ public class BookEntry : MonoBehaviour
             Debug.Log("El boton no tiene el change scene");
         }
         _hasPanelOpen = false;
+        _level = 0;
        
     }
 
@@ -104,28 +109,22 @@ public class BookEntry : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if(_canInterac && InputManager.Instance.InteracWasPressedThisFrame())
+        if(_canInterac)
         {
-            //Miramos si tiene libros 
-            if (_pickUp.HasSomething())
+            if ( !_hasPanelOpen && InputManager.Instance.InteracWasPressedThisFrame())
             {
-                int scene = 0;
-                string name ="";
-                _pickUp.GetInfo(0, ref scene, ref name);
-                TextNivel.text = name;
-                //Si tiene ponemos el panel
-                PanelBookEntry.SetActive(true);
-                _changeScene.SetScene(scene);
-                _playerMovement.ActivateDesactivateMovement(false);
-                _hasPanelOpen = true;
+                //Miramos si tiene libros 
+                if (_pickUp.HasSomething())
+                {
+                    ActPanel(true);
+                    _hasPanelOpen = true;
+                }
             }
-            
-        }
-        if(_hasPanelOpen && InputManager.Instance.EscapeWasPressedThisFrame())
-        {
-            PanelBookEntry.SetActive(false);
-            _playerMovement.ActivateDesactivateMovement(true);
-            _hasPanelOpen = false;
+            else if (_hasPanelOpen && InputManager.Instance.InteracWasPressedThisFrame())
+            {
+                ActPanel(false);
+                _hasPanelOpen = false;
+            }
         }
     }
     #endregion
@@ -137,7 +136,21 @@ public class BookEntry : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
+    public void ChangeLevel(bool next)
+    {
+        if (next)
+        {
+            _level++;
+        }
+        else
+        {
+            if(_level-1 >= 0)
+            {
+                _level--;
+            }
+        }
+        ActPanel(true);
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -164,6 +177,26 @@ public class BookEntry : MonoBehaviour
             //El jugador no puede interactuar
             _canInterac = false;
         }
+    }
+    private void ActPanel(bool est)
+    {
+        if (est)
+        {
+            int scene = 0;
+            string name = "";
+            _pickUp.GetInfo(ref _level, ref scene, ref name);
+            if(name != "")
+            {
+                TextNivel.text = name;
+                _changeScene.SetScene(scene);
+            }
+            
+        }
+        
+        //Si tiene ponemos el panel
+        PanelBookEntry.SetActive(est);
+        _playerMovement.ActivateDesactivateMovement(!est);
+        _hasPanelOpen = est;
     }
     #endregion   
 

@@ -1,13 +1,19 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
-// Nombre del juego
-// Proyectos 1 - Curso 2025-26
+// Se encarga de controllar todos los ataques y el cambio de armas
+// del jugador.
+// Tristan Sanchez
+// Babel
 //---------------------------------------------------------
 
 using UnityEngine;
 // Añadir aquí el resto de directivas using
-
+//---------------------------------------------------------
+// Instruciones de montaje
+// Se debe poner el componente en el collider del jugador y si no queremos que lleve armas dejaremos 
+// el hueco de range weapon vacio
+// en el peehole debemos poner la mirilla que se ve en le juego
+// y poner el mele attack tambien en el collider
+//---------------------------------------------------------
 
 /// <summary>
 /// Antes de cada class, descripción de qué es y para qué sirve,
@@ -30,10 +36,7 @@ public class AttackController : MonoBehaviour
     /// Mirilla del jugador
     /// </summary>
     [SerializeField] GameObject Peephole;
-    /// <summary>
-    /// Player
-    /// </summary>
-    [SerializeField] GameObject Player;
+    
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -124,7 +127,7 @@ public class AttackController : MonoBehaviour
             {
                 if (RangeWeapon != null)
                 {
-                    Debug.Log("cambiando de arma");
+                   // Debug.Log("cambiando de arma");
                     Weapon = !Weapon;
                     ChangeWeapon();
                 }
@@ -195,9 +198,9 @@ public class AttackController : MonoBehaviour
                 _shoot.ActivateDesactivateShoot(false);
                 RangeWeapon.SetActive(false);
              }
-            else if (RangeWeapon != null)
+            else if (RangeWeapon != null && !_mele.IsAttacking())
             {
-                 Debug.Log("disparo Activado");            
+                 //Debug.Log("disparo Activado");            
                 _shoot.ActivateDesactivateShoot(true);
                 RangeWeapon.SetActive(true);
                 _mele.ActivateDesactivateMele(false);
@@ -217,7 +220,7 @@ public class AttackController : MonoBehaviour
             //Quitamos la antigua arma si tenemos
             if (RangeWeapon != null)
             {
-                Debug.Log("dejando antigua arma a distancia");
+                //Debug.Log("dejando antigua arma a distancia");
                 _rangeTransform.position = this.transform.position;
                 _shoot.ActivateDesactivateShoot(false);
                 RangeWeapon.SetActive(true);
@@ -230,9 +233,10 @@ public class AttackController : MonoBehaviour
             _rangeTransform = RangeWeapon.GetComponent<Transform>();
             _shoot = RangeWeapon.GetComponent<ShootAttack>();
             _shoot.ActivateDesactivateShoot(true);
-            _shoot.PlayerConfig(Peephole, Player);
+            GameObject Player = transform.parent.gameObject;
+            _shoot.PlayerConfig(Peephole,Player);
             RangeWeapon.SetActive(false);
-            Debug.Log("Arma Cambiada");
+           // Debug.Log("Arma Cambiada");
             //Añadir que se ponga el arma cogida solo si no estamos atacando
             ChangeWeapon();
         }

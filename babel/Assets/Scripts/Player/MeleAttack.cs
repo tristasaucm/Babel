@@ -1,13 +1,11 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
-// Nombre del juego
-// Proyectos 1 - Curso 2025-26
+// Es el script encargado de realizar el ataque a mele del jugador
+// Tristan Sanchez
+// Babel
 //---------------------------------------------------------
 
 using UnityEngine;
 // Añadir aquí el resto de directivas using
-
 
 /// <summary>
 /// Antes de cada class, descripción de qué es y para qué sirve,
@@ -27,14 +25,6 @@ public class MeleAttack : MonoBehaviour
     /// GameObject del arma mele
     /// </summary>
     [SerializeField] private GameObject MeleWeapon;
-    /// <summary>
-    /// duracion del arma mele
-    /// </summary>
-    [SerializeField] private float MeleDuration;
-    /// <summary>
-    /// Cooldown del arma mele
-    /// </summary>
-    [SerializeField] private float MeleCooldown;
     /// <summary>
     /// Diferencia para que quede bien el sprite
     /// </summary>
@@ -89,7 +79,18 @@ public class MeleAttack : MonoBehaviour
     /// Para quitar el movimiento al atacar
     /// </summary>
     private PlayerMovement _playerMovement;
-
+    /// <summary>
+    /// duracion del arma mele
+    /// </summary>
+    private float _meleDuration;
+    /// <summary>
+    /// Cooldown del arma mele
+    /// </summary>
+    private float _meleCooldown;
+    /// <summary>
+    /// componente del arma a mele
+    /// </summary>
+    private MeleWeapon _mele;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -110,6 +111,9 @@ public class MeleAttack : MonoBehaviour
         if(MeleWeapon != null)
         {
             _transformWeapon = MeleWeapon.GetComponent<Transform>();
+            _mele = MeleWeapon.GetComponent<MeleWeapon>();
+            _mele.GetMeleCooldown(ref _meleCooldown);
+            _mele.GetMeleDuration(ref _meleDuration);
             _isAttaking = false;
             _canAttack = true;
             MeleWeapon.SetActive(false);
@@ -133,7 +137,7 @@ public class MeleAttack : MonoBehaviour
         if (_canAttack &&  _isUsingMele)
         {
 
-            if (MeleCooldown < Time.time - _AttackFinishTime)
+            if (_meleCooldown < Time.time - _AttackFinishTime)
             {
                 Atack();
 
@@ -181,10 +185,14 @@ public class MeleAttack : MonoBehaviour
         {
             _transformWeapon.position = this.transform.position;
             MeleWeapon.SetActive(true);
-            MeleWeapon.GetComponent<MeleWeapon>().Equip(false, false);
+            _mele.Equip(false, false);
             MeleWeapon = null;
         }
        
+    }
+    public bool IsAttacking()
+    {
+        return _isAttaking;
     }
     #endregion
 
@@ -200,19 +208,20 @@ public class MeleAttack : MonoBehaviour
     private void Atack()
     {
         //Miramos la direccion que queremos atacar
-        _dir = Input.mousePosition;
+        _dir = InputManager.Instance.MovementVector;
         //Metodo a revisar para que quede mejor a futuro
-        int Quadrant = GetQuadrant(_dir);
+        int Quadrant;
         //Debug.Log(Quadrant);
         //Generamos el ataque en la dirección
         if (!_isAttaking && InputManager.Instance.AttackWasPressedThisFrame())
         {
+            Quadrant = GetQuadrant(_dir);
             _playerMovement.ActivateDesactivateMovement(false);
             _isAttaking = true;
             _AttackStartTime = Time.time;
             GenerateWeapon(Quadrant);
         }
-        else if (_isAttaking && MeleDuration < Time.time - _AttackStartTime)
+        else if (_isAttaking && _meleDuration < Time.time - _AttackStartTime)
         {
             _AttackFinishTime = Time.time;
             _isAttaking = false;
@@ -227,25 +236,34 @@ public class MeleAttack : MonoBehaviour
     /// <param name="Quadrant">Quadrante en el que se encuentra el arma </param>
     private void GenerateWeapon(int Quadrant)
     {
-        MeleWeapon.SetActive(true);
+       
         Vector2 tranform = this.transform.position;
         Quaternion Rotation = Quaternion.Euler(0, 0, 0);
         switch (Quadrant)
         {
+            case 0:
+                Vector2 newInput = InputManager.Instance.LastMovementVector;
+                int quadrant = GetQuadrant(newInput);
+                GenerateWeapon(quadrant);
+                break;
             case 1: tranform.y+= 1; Rotation = Quaternion.Euler(0, 0, 0); break;
-            case 2: tranform.y += 1; tranform.x -= 0.5f; Rotation = Quaternion.Euler(0, 0, 45); break;
-            case 3: tranform.x-=0.5f; Rotation = Quaternion.Euler(0, 0, 90); break;
-            case 4: tranform.y -= 0.5f; tranform.x -= 0.5f; Rotation = Quaternion.Euler(0, 0, 135); break;
-            case 5: tranform.y-= 0.5f; Rotation = Quaternion.Euler(0, 0, 180); break;
-            case 6: tranform.y -= 0.5f; tranform.x += 0.5f; Rotation = Quaternion.Euler(0, 0, -135); break;
-            case 7: tranform.x+=0.5f; Rotation = Quaternion.Euler(0, 0, -90); break;
-            case 8: tranform.y += 1; tranform.x += 0.5f; Rotation = Quaternion.Euler(0, 0, -45); break;
-
-
+           
+            case 2: tranform.x-=0.5f; tranform.y += Ydif; Rotation = Quaternion.Euler(0, 0, 90); break;
+           
+            case 3: tranform.y-= 0.5f; Rotation = Quaternion.Euler(0, 0, 180); break;
+            
+            case 4: tranform.x+=0.5f; tranform.y += Ydif; Rotation = Quaternion.Euler(0, 0, -90); break;
+            
+            
         }
-        tranform.y += Ydif;
-        _transformWeapon.position = tranform;
-        _transformWeapon.rotation = Rotation;
+        if (Quadrant != 0)
+        {
+            MeleWeapon.transform.position = tranform;
+            MeleWeapon.transform.rotation = Rotation;
+            MeleWeapon.SetActive(true);
+        }
+       
+
     }
     /// <summary>
     /// Metodo para obtener en que cuadrante se encuentra el puntero
@@ -254,54 +272,23 @@ public class MeleAttack : MonoBehaviour
     /// <returns></returns>
     private int GetQuadrant(Vector2 dir)
     {
-        int dedzoneLat = 150;
-        int dedzoneUp = 50;
-        int Quadrant = 0;
-        int ScreenWidth = Screen.width;
-        int ScreenHeight = Screen.height;
-        if (dir.y - dedzoneUp > ScreenHeight / 2)
+        int Quadrant = 0; 
+        if (dir.x > 0)
         {
-            if (dir.x - dedzoneLat > ScreenWidth / 2)
-            {
-                Quadrant = 8;
-            }
-            else if (dir.x + dedzoneLat < ScreenWidth / 2)
-            {
-                Quadrant = 2;
-            }
-            else
-            {
-                Quadrant = 1;
-            }
-        }
-        else if (dir.y + 3 * dedzoneUp < ScreenHeight / 2)
+            Quadrant = 4;
+        }else if(dir.x < 0)
         {
-            if (dir.x - dedzoneLat > ScreenWidth / 2)
-            {
-                Quadrant = 6;
-            }
-            else if (dir.x + dedzoneLat < ScreenWidth / 2)
-            {
-                Quadrant = 4;
-            }
-            else
-            {
-                Quadrant = 5;
-            }
-        }
-        else
+            Quadrant = 2;
+        }else if(dir.y > 0)
         {
-            if (dir.x > ScreenWidth / 2)
-            {
-                Quadrant = 7;
-            }
-            else
-            {
-                Quadrant = 3;
-            }
+            Quadrant = 1;
+        }else if (dir.y < 0)
+        {
+            Quadrant = 3; 
         }
 
-        return Quadrant;
+        Debug.Log(Quadrant);
+            return Quadrant;
     }
     /// <summary>
     /// Metodo que nos hace que podamos equipar nuevas armas a mele
@@ -322,11 +309,14 @@ public class MeleAttack : MonoBehaviour
             }
             //establecer como arma la recogida
             MeleWeapon = _posibleMele;
+            _mele = MeleWeapon.GetComponent<MeleWeapon>();
+            _mele.GetMeleCooldown(ref _meleCooldown);
+            _mele.GetMeleDuration(ref _meleDuration);
             _canpickMele = false;
             //Desactivar el arma recogida
            _transformWeapon = MeleWeapon.GetComponent<Transform>();
             MeleWeapon.SetActive(false);
-            MeleWeapon.GetComponent<MeleWeapon>().Equip(true,false);
+            _mele.Equip(true,false);
             _canAttack = true;
             _isAttaking = false;
            // Debug.Log("Arma Cambiada");

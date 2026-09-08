@@ -1,8 +1,7 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
-// Nombre del juego
-// Proyectos 1 - Curso 2025-26
+// Scritp para armas que disparan que puede ser usado por quien porte ese arma en ese momento
+// Tristán Sánchez 
+// Babel
 //---------------------------------------------------------
 
 using System.Drawing;
@@ -175,15 +174,15 @@ public class ShootAttack : MonoBehaviour
         /*Debug.Log(
        "ShootAttack: IsUsedByEnemie = " + _remoteShoot
    );*/
-        return _remoteShoot;
+        return _enemyuUse;
     }
     /// <summary>
     /// Metodo para disparar siendo enemigo
     /// </summary>
-    public void RemoteShoot()
+    public void RemoteShoot(bool est)
     {
         //Debug.Log("ShootAttack: RemoteShoot recibido");
-        _remoteShoot = true;
+        _remoteShoot = est;
         _enemyuUse = true;
        
     }

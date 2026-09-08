@@ -30,7 +30,14 @@ public class LevelManager : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
+    /// <summary>
+    /// Gameobject del panel de pausa
+    /// </summary>
+    [SerializeField] private GameObject PanelPause;
+    /// <summary>
+    /// La entidad que tiene a todos los objetos que se tienen que pausar
+    /// </summary>
+    [SerializeField] private GameObject ObjetsToPause;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -88,7 +95,34 @@ public class LevelManager : MonoBehaviour
     {
         return _instance != null;
     }
-
+    /// <summary>
+    /// Cierra la build
+    /// </summary>
+    public void Exit()
+    {
+        // Debug.Log("Cerrando juego");
+        Application.Quit();
+    }
+    /// <summary>
+    /// Cambia el boton seleccionado al del panel de pausa y activa el panel
+    /// </summary>
+    public void ChangeToPause()
+    {
+        //Activamos el Pause Screen
+        PanelPause.SetActive(true);
+        //Pausamos a los objetos
+        ObjetsToPause.SetActive(false);
+    }
+    /// <summary>
+    /// Vuelve a activar el juego
+    /// </summary>
+    public void ChangeToUnPause()
+    {
+        //Activamos el Pause Screen
+        PanelPause.SetActive(false);
+        //Pausamos a los objetos
+        ObjetsToPause.SetActive(true);
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----

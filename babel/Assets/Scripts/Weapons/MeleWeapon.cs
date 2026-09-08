@@ -26,6 +26,14 @@ public class MeleWeapon : MonoBehaviour
     /// Daño que produce el arma
     /// </summary>
     [SerializeField] private int Damage;
+    /// <summary>
+    /// duracion del arma mele
+    /// </summary>
+    [SerializeField] private float MeleDuration;
+    /// <summary>
+    /// Cooldown del arma mele
+    /// </summary>
+    [SerializeField] private float MeleCooldown;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -93,6 +101,14 @@ public class MeleWeapon : MonoBehaviour
         _equip = est;
         _enemie = enemie;
     }
+    public void GetMeleDuration(ref float _duration)
+    {
+        _duration = MeleDuration;
+    }
+    public void GetMeleCooldown(ref float _cooldown)
+    {
+        _cooldown = MeleCooldown;
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -104,7 +120,7 @@ public class MeleWeapon : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Mira quien ataco para si pueden recivir daño
-        _enemieHealth = collision.GetComponent<UniversalHealth>();
+        _enemieHealth = collision.GetComponentInParent<UniversalHealth>();
         if(_enemieHealth != null && _equip)
         {
             if (_enemieHealth.IsPlayer()&& _enemie)
