@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 277569877}
   - component: {fileID: 277569880}
   - component: {fileID: 277569879}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Espada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8587,7 +8587,7 @@ GameObject:
   - component: {fileID: 1331526045}
   - component: {fileID: 1331526044}
   - component: {fileID: 1331526043}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Espada (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9637,6 +9637,10 @@ PrefabInstance:
     - target: {fileID: 1626523656190102873, guid: bf54b930ac6c932498d7d7900b71e924, type: 3}
       propertyPath: m_Name
       value: Espada
+      objectReference: {fileID: 0}
+    - target: {fileID: 1626523656190102873, guid: bf54b930ac6c932498d7d7900b71e924, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9191320143442711689, guid: bf54b930ac6c932498d7d7900b71e924, type: 3}
       propertyPath: m_LocalPosition.x

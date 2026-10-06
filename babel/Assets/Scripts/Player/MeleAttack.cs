@@ -329,11 +329,13 @@ public class MeleAttack : MonoBehaviour
     {
         if (collision.GetComponent<MeleWeapon>())
         {
+            //Debug.Log("Arma Encontrada");
             _canpickMele = true;
             _posibleMele = collision.gameObject;
             //si es la misma no la cogemos
             if(_posibleMele == MeleWeapon)
             {
+
                 _canpickMele = false;
             }
         }

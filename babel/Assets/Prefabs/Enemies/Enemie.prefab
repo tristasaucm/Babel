@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 7421694189573399053}
   - component: {fileID: 4242324223235467192}
   - component: {fileID: 7214929552476248240}
-  m_Layer: 0
+  - component: {fileID: 5864336137828965066}
+  m_Layer: 7
   m_Name: Enemie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,6 +197,19 @@ MonoBehaviour:
   Player: {fileID: 0}
   BostSpeed: 1
   Collider: {fileID: 6507900431279819235}
+--- !u!114 &5864336137828965066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71602177975183816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f09e8b6ebd80a24d8df40101f166449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 5
 --- !u!1 &1296126811401966485
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +221,7 @@ GameObject:
   - component: {fileID: 192429666953584117}
   - component: {fileID: 4623921516089015925}
   - component: {fileID: 1486011350610789472}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MeleDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +313,7 @@ GameObject:
   - component: {fileID: 2371722298079380840}
   - component: {fileID: 7299756405774690333}
   - component: {fileID: 714188903559841046}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
