@@ -4,7 +4,6 @@
 // Babel
 //---------------------------------------------------------
 
-using System.Drawing;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -31,6 +30,18 @@ public class ShootAttack : MonoBehaviour
     /// Usuario del arma
     /// </summary>
     [SerializeField] private GameObject Player;
+    /// <summary>
+    /// Número de balas en el "pool"
+    /// </summary>
+    [SerializeField] private int NumBulletsPool = 7;
+    /// <summary>
+    /// Contenedor del pool de balas
+    /// </summary>
+    [SerializeField] private Transform BulletsContainer;
+    /// <summary>
+    /// Tiempo que tarda en recargar
+    /// </summary>
+    [SerializeField] float TimeOfRecharge = 1f;
 
     #endregion
 
@@ -49,7 +60,7 @@ public class ShootAttack : MonoBehaviour
     /// <summary>
     /// bool que se encarga de si estas disparando
     /// </summary>
-    private bool _isShooting;
+    private bool _outOfBullets;
     /// <summary>
     /// bool que indica si estamos usando el disparo
     /// </summary>
@@ -74,6 +85,18 @@ public class ShootAttack : MonoBehaviour
     /// Dice si lo esta usando un enemigo
     /// </summary>
     private bool _enemyuUse;
+    /// <summary>
+    /// Pool de balas máximas que podrán aparecer.
+    /// </summary>
+    private GameObject[] _bulletsPool;
+    /// <summary>
+    /// Controla el número de balas que tiene el jugador.
+    /// </summary>
+    private int _ammo;
+    /// <summary>
+    /// Tiempo de cuando te quedaste sin balas
+    /// </summary>
+    private float _timeOfEndBullets;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -93,13 +116,25 @@ public class ShootAttack : MonoBehaviour
         _playerTransform = Player.GetComponent<Transform>();
         _peepholeTransform = Peephole.GetComponent<Transform>();
         _bullet = Proyectile.GetComponent<Bullet>();
-        _isShooting = false;
+        _outOfBullets = false;
         _remoteShoot = false;
+        _ammo = NumBulletsPool;
         if (!_bullet)
         {
             Debug.Log("No hay bala");
         }
         Proyectile.SetActive(false);
+        //Creamos el array de balas
+        _bulletsPool = new GameObject[NumBulletsPool]; // Reserva el espacio en el array
+        for (int i = 0; i < NumBulletsPool; i++) // Por cada hueco genera una bala
+        {
+            //Istanciamos la bala
+            GameObject bullet = Instantiate(Proyectile);
+            bullet.transform.SetParent(BulletsContainer, true);
+            _bulletsPool[i] = bullet; // Guarda la bala en la pool
+            bullet.SetActive(false);
+        }
+        _ammo = NumBulletsPool-1;
     }
 
     /// <summary>
@@ -107,15 +142,16 @@ public class ShootAttack : MonoBehaviour
     /// </summary>
     void Update()
     {
-       /* Debug.Log(
-       "canShoot: " + _canShoot +
-       " | isUsingShoot: " + _isUsingShoot +
-       " | remoteShoot: " + _remoteShoot +
-       " | isShooting: " + _isShooting
-   );*/
-       //Si podemos disparar y estamos usando el disparo colocamos el arma sobre nosotros
-        if (_canShoot && _isUsingShoot )
+        /* Debug.Log(
+        "canShoot: " + _canShoot +
+        " | isUsingShoot: " + _isUsingShoot +
+        " | remoteShoot: " + _remoteShoot +
+        " | isShooting: " + _isShooting
+    );*/
+        //Si podemos disparar y estamos usando el disparo colocamos el arma sobre nosotros
+        if (_canShoot && _isUsingShoot)
         {
+
             Vector3 playerpos = Player.transform.position;
             playerpos.y += 0.5f;
             this.transform.position = playerpos;
@@ -123,18 +159,37 @@ public class ShootAttack : MonoBehaviour
             float AnguloZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             this.transform.rotation = Quaternion.Euler(0, 0, AnguloZ);
             //Si podemos disparar disparamos
-            if (!_isShooting &&((
-        (!_enemyuUse && InputManager.Instance.AttackWasPressedThisFrame())
-        || (_enemyuUse && _remoteShoot)
+            if (!_outOfBullets && ((
+        ((!_enemyuUse && InputManager.Instance.AttackWasPressedThisFrame())
+        || (_enemyuUse && _remoteShoot))
     )))
             {
-               //Debug.Log("disparo desde el arco");
-                Proyectile.SetActive(true);
-                _bullet.Shoot(_peepholeTransform.position,this.transform.position);
-                _isShooting = true;
-                
+                //Debug.Log("disparo desde el arco");
+
+                // -- Comprueba si hemos gastado todas las balas y hay que recargar --
+                if (_ammo < 0)
+                {
+                    _outOfBullets = true;
+                    _timeOfEndBullets = Time.time;
+                }
+                else if(!_outOfBullets) //Si todavia tenemos balas podemos realizar el disparo
+                {
+                    _bulletsPool[_ammo].SetActive(true);//Se activa la bala que corresponde
+                    _bulletsPool[_ammo].GetComponent<Bullet>().Shoot(_peepholeTransform.position, this.transform.position, _ammo);//se dispara
+                    //Debug.Log("bala " + _ammo);
+                    //Debug.Log(_ammo);
+                    _ammo--;//Y se baja el numero de balas que tenemos
+
+                }
+               
+                    
             }
-        }   
+            if (_outOfBullets)//Si nos hemos quedado sin balas recargamos
+            {
+                Debug.Log("recargando");
+                Recharge();
+            }
+        }
     }
     #endregion
 
@@ -148,12 +203,16 @@ public class ShootAttack : MonoBehaviour
     /// <summary>
     /// Metodo que indica si el ataque ha terminado para poder hacer otro
     /// </summary>
-    public void HasFinishAttack() 
+    public void HasFinishAttack(int i)
     {
         //Debug.Log("========== FIN DEL DISPARO ==========");
         _remoteShoot = false;
-        _isShooting = false;
-        Proyectile.SetActive(false);
+        _outOfBullets = false;
+        _bulletsPool[i].SetActive(false);
+        if(i == NumBulletsPool)
+        {
+            _ammo = NumBulletsPool;
+        }
     }
     /// <summary>
     /// Metodo que ativa y desactiva el disparo
@@ -161,7 +220,7 @@ public class ShootAttack : MonoBehaviour
     /// <param name="status"> true activo false desactivado</param>
     public void ActivateDesactivateShoot(bool status)
     {
-       // Debug.Log("estado " + status);
+        // Debug.Log("estado " + status);
         _isUsingShoot = status;
         _canShoot = status;
     }
@@ -184,7 +243,7 @@ public class ShootAttack : MonoBehaviour
         //Debug.Log("ShootAttack: RemoteShoot recibido");
         _remoteShoot = est;
         _enemyuUse = true;
-       
+
     }
     /// <summary>
     /// Metodo que indica si estamos disparando
@@ -192,7 +251,7 @@ public class ShootAttack : MonoBehaviour
     /// <returns></returns>
     public bool IsShooting()
     {
-        return _isShooting;
+        return _outOfBullets;
     }
     /// <summary>
     /// Metodo que indica si lo usa un enemigo
@@ -215,7 +274,7 @@ public class ShootAttack : MonoBehaviour
     /// </summary>
     /// <param name="Peephole">Mirilla del jugador</param>
     /// <param name="Player">Persona que lleva el arma </param>
-    public void PlayerConfig(GameObject Peephole,GameObject Player)
+    public void PlayerConfig(GameObject Peephole, GameObject Player)
     {
         this.Peephole = Peephole;
         this.Player = Player;
@@ -241,6 +300,15 @@ public class ShootAttack : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+    private void Recharge()
+    {
+        //Miramos si el tiempo de recarga paso y recargamos
+        if(TimeOfRecharge < Time.time-_timeOfEndBullets)
+        {
+            _ammo = NumBulletsPool-1;
+            _outOfBullets = false;
         }
     }
     #endregion   

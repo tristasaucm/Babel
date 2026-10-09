@@ -86,6 +86,7 @@ public class EnemiesShoot : MonoBehaviour
     /// </summary>
     void Update()
     {
+        //Debug.Log(_canAttack);
         //Miramos si podemos atacar y no estamos atacando ya 
         if (_canAttack && !_shoot.IsShooting())
         {

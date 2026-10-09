@@ -63,6 +63,10 @@ public class Bullet : MonoBehaviour
     /// Ataque a distancia
     /// </summary>
     private ShootAttack _shootAttack;
+    /// <summary>
+    /// El numero de bala que somos en la pool
+    /// </summary>
+    private int _numbala;
 
     #endregion
 
@@ -91,12 +95,14 @@ public class Bullet : MonoBehaviour
         //Miramos si ha sido disparado
         if (_hasbeenShoot)
         {
+            //Debug.Log("avanzando");
            this.transform.position += transform.right* Speed *Time.deltaTime;
             if (Maxdistance < Vector3.Distance(_inicialPos,this.transform.position) )
             {
-               // Debug.Log("llego al maximo");
+               Debug.Log("llego al maximo");
                 this.gameObject.SetActive(false);
-                _shootAttack.HasFinishAttack();
+                _shootAttack.HasFinishAttack(_numbala);
+                _hasbeenShoot = false;
             }
             
         }
@@ -115,15 +121,25 @@ public class Bullet : MonoBehaviour
     /// </summary>
     /// <param name="point"> punto de llegada</param>
     /// <param name="PlayerPos">punto de partida</param>
-    public void Shoot(Vector3 point,Vector3 PlayerPos)
+    public void Shoot(Vector3 point,Vector3 PlayerPos,int numbala)
     {
-       // Debug.Log("¡¡¡BULLET SHOOT!!!");
-        this.transform.position = PlayerPos;
-        Vector2 dir = point - this.transform.position;
-        float AnguloZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(0, 0, AnguloZ);
-        _hasbeenShoot = true;
-        _inicialPos = this.transform.position;
+        Debug.Log("¡¡¡BULLET SHOOT!!!");
+        //Guardamos que bala somos 
+        //revisamos si ya nos han disparado
+        if (_shootAttack == null)
+            _shootAttack = Shoter.GetComponent<ShootAttack>();
+
+        _numbala = numbala;
+            this.transform.position = PlayerPos;
+            Vector2 dir = point - this.transform.position;
+            float AnguloZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            this.transform.rotation = Quaternion.Euler(0, 0, AnguloZ);
+            _hasbeenShoot = true;
+            _inicialPos = this.transform.position;
+            
+           
+        
+       
     }
     #endregion
 
@@ -144,11 +160,12 @@ public class Bullet : MonoBehaviour
             {
                 if (_enemieHealth.IsPlayer())
                 {
-                    //Debug.Log("player");
+                    Debug.Log("player");
                     if (_shootAttack.IsUsedByEnemie())
                     {
                         _enemieHealth.GetDamage(Damage);
-                        _shootAttack.HasFinishAttack();
+                        _shootAttack.HasFinishAttack(_numbala);
+                        _hasbeenShoot = false;
                     }
                 }
                 else
@@ -156,9 +173,10 @@ public class Bullet : MonoBehaviour
                     //Debug.Log("Enemie");
                     if (!_shootAttack.IsUsedByEnemie())
                     {
-                      //  Debug.Log("dañando enemigo");
+                      Debug.Log("dañando enemigo");
                         _enemieHealth.GetDamage(Damage);
-                        _shootAttack.HasFinishAttack();
+                        _shootAttack.HasFinishAttack(_numbala);
+                        _hasbeenShoot = false;
                     }
 
                 }

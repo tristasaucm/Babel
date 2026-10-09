@@ -126,10 +126,12 @@ public class MeleWeapon : MonoBehaviour
             if (_enemieHealth.IsPlayer()&& _enemie)
             {
                 _enemieHealth.GetDamage(Damage);
+
             }
             else if (!_enemieHealth.IsPlayer() && !_enemie)
             {
                 _enemieHealth.GetDamage(Damage);
+                this.gameObject.SetActive(false);
             }
         }
     }

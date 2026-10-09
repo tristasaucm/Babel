@@ -1,0 +1,871 @@
+fileFormatVersion: 2
+guid: 97b22abb202e7e64b82ea4a41443e0bc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5133162844309714609
+    second: TilemapFantasia_0
+  - first:
+      213: 2027080941472031838
+    second: TilemapFantasia_1
+  - first:
+      213: 8339674410684776084
+    second: TilemapFantasia_2
+  - first:
+      213: -2034366359201622394
+    second: TilemapFantasia_3
+  - first:
+      213: 2553635543023577486
+    second: TilemapFantasia_4
+  - first:
+      213: 95937866243062049
+    second: TilemapFantasia_5
+  - first:
+      213: -8891106767052149084
+    second: TilemapFantasia_6
+  - first:
+      213: -2749747400517527024
+    second: TilemapFantasia_7
+  - first:
+      213: 6290848059063381586
+    second: TilemapFantasia_8
+  - first:
+      213: -563193737700360109
+    second: TilemapFantasia_9
+  - first:
+      213: 6127597107341967084
+    second: TilemapFantasia_10
+  - first:
+      213: -4884840170500394831
+    second: TilemapFantasia_11
+  - first:
+      213: -4819640541361647796
+    second: TilemapFantasia_12
+  - first:
+      213: 8125426909039121920
+    second: TilemapFantasia_13
+  - first:
+      213: -5411236677833241196
+    second: TilemapFantasia_14
+  - first:
+      213: -2832896322146445424
+    second: TilemapFantasia_15
+  - first:
+      213: 5601543983688639084
+    second: TilemapFantasia_16
+  - first:
+      213: -2365007238547675404
+    second: TilemapFantasia_17
+  - first:
+      213: 2801303647532574445
+    second: TilemapFantasia_18
+  - first:
+      213: 7212705602688690318
+    second: TilemapFantasia_19
+  - first:
+      213: -766519327927024898
+    second: TilemapFantasia_20
+  - first:
+      213: -1116587867883761069
+    second: TilemapFantasia_21
+  - first:
+      213: 4946102326437499466
+    second: TilemapFantasia_22
+  - first:
+      213: -4235725829066563015
+    second: TilemapFantasia_23
+  - first:
+      213: 3980894587239420763
+    second: TilemapFantasia_24
+  - first:
+      213: -8487884101884629966
+    second: TilemapFantasia_25
+  - first:
+      213: -1160549941132088045
+    second: TilemapFantasia_26
+  - first:
+      213: -2736808859673694940
+    second: TilemapFantasia_27
+  - first:
+      213: -4759335522007967296
+    second: TilemapFantasia_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TilemapFantasia_0
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b670550968ac3740800000000000000
+      internalID: 5133162844309714609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_1
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e54a7675063a12c10800000000000000
+      internalID: 2027080941472031838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49ef747e0b97cb370800000000000000
+      internalID: 8339674410684776084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_3
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68658c8239a74c3e0800000000000000
+      internalID: -2034366359201622394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_4
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e896bb32ff5507320800000000000000
+      internalID: 2553635543023577486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_5
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1293de52bf6d45100800000000000000
+      internalID: 95937866243062049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_6
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aee8c1a0817c9480800000000000000
+      internalID: -8891106767052149084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_7
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01a591ade4fe6d9d0800000000000000
+      internalID: -2749747400517527024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_8
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25ead68baf49d4750800000000000000
+      internalID: 6290848059063381586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_9
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 143
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35045ac87422f28f0800000000000000
+      internalID: -563193737700360109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_10
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 108
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cee34dd8a19990550800000000000000
+      internalID: 6127597107341967084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_11
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 108
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b0f3c4febf853cb0800000000000000
+      internalID: -4884840170500394831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_12
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 108
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4f411396723d1db0800000000000000
+      internalID: -4819640541361647796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_13
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 108
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0065da139b053c070800000000000000
+      internalID: 8125426909039121920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_14
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 108
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49d4f2659ec67e4b0800000000000000
+      internalID: -5411236677833241196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_15
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 108
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09753f8edc78fa8d0800000000000000
+      internalID: -2832896322146445424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_16
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 108
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c62ec7d239eacbd40800000000000000
+      internalID: 5601543983688639084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_17
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 108
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f66327627ecd2fd0800000000000000
+      internalID: -2365007238547675404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_18
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 108
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de66f2353da30e620800000000000000
+      internalID: 2801303647532574445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_19
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 108
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e88aab5f78da81460800000000000000
+      internalID: 7212705602688690318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_20
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 73
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef240718bb6cc55f0800000000000000
+      internalID: -766519327927024898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_21
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 73
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 352174600451180f0800000000000000
+      internalID: -1116587867883761069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_22
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 73
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a425a0e3cd514a440800000000000000
+      internalID: 4946102326437499466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_23
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 73
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9326a80eccda735c0800000000000000
+      internalID: -4235725829066563015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_24
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 73
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b535ea0198afe3730800000000000000
+      internalID: 3980894587239420763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_25
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 73
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23c2b7c416af43a80800000000000000
+      internalID: -8487884101884629966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_26
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 73
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31da8b63af5e4efe0800000000000000
+      internalID: -1160549941132088045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_27
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 73
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42de105a7d6e40ad0800000000000000
+      internalID: -2736808859673694940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilemapFantasia_28
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 73
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c911db0f8173fdb0800000000000000
+      internalID: -4759335522007967296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TilemapFantasia_0: 5133162844309714609
+      TilemapFantasia_1: 2027080941472031838
+      TilemapFantasia_10: 6127597107341967084
+      TilemapFantasia_11: -4884840170500394831
+      TilemapFantasia_12: -4819640541361647796
+      TilemapFantasia_13: 8125426909039121920
+      TilemapFantasia_14: -5411236677833241196
+      TilemapFantasia_15: -2832896322146445424
+      TilemapFantasia_16: 5601543983688639084
+      TilemapFantasia_17: -2365007238547675404
+      TilemapFantasia_18: 2801303647532574445
+      TilemapFantasia_19: 7212705602688690318
+      TilemapFantasia_2: 8339674410684776084
+      TilemapFantasia_20: -766519327927024898
+      TilemapFantasia_21: -1116587867883761069
+      TilemapFantasia_22: 4946102326437499466
+      TilemapFantasia_23: -4235725829066563015
+      TilemapFantasia_24: 3980894587239420763
+      TilemapFantasia_25: -8487884101884629966
+      TilemapFantasia_26: -1160549941132088045
+      TilemapFantasia_27: -2736808859673694940
+      TilemapFantasia_28: -4759335522007967296
+      TilemapFantasia_3: -2034366359201622394
+      TilemapFantasia_4: 2553635543023577486
+      TilemapFantasia_5: 95937866243062049
+      TilemapFantasia_6: -8891106767052149084
+      TilemapFantasia_7: -2749747400517527024
+      TilemapFantasia_8: 6290848059063381586
+      TilemapFantasia_9: -563193737700360109
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
