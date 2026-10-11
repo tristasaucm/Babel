@@ -38,6 +38,10 @@ public class PlayerMovement : MonoBehaviour
     /// Duracion del sprint
     /// </summary>
     [SerializeField] private float SprintDuration;
+    /// <summary>
+    /// El animator del player
+    /// </summary>
+    [SerializeField] private Animator Animator;
 
     #endregion
 
@@ -135,6 +139,8 @@ public class PlayerMovement : MonoBehaviour
         if (_movementActive)
         {
             Movement(dir);
+            Animator.SetFloat("DirX", dir.x);
+            Animator.SetFloat("DirY", dir.y);
         }
         else
         {
