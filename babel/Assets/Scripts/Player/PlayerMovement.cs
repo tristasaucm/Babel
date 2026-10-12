@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     [SerializeField] private float Speed;
     /// <summary>
-    /// Boleano que decide si el jugador puede usar el sprint o no 
+    /// Sprint del jugador
     /// </summary>
     [SerializeField] private int Sprint;
     /// <summary>
@@ -165,6 +165,29 @@ public class PlayerMovement : MonoBehaviour
     {
         _movementActive = next;
        
+    }
+    /// <summary>
+    /// Cambia la velocidad del player
+    /// </summary>
+    /// <param name="buff">Porcentaje que lo  sube</param>
+    public void ChangeSpeed(float buff)
+    {
+        Speed += Speed * buff;
+        //Debug.Log(Speed);
+    }
+    /// <summary>
+    /// Cambia la duracion del sprint del player
+    /// </summary>
+    /// <param name="buff"></param>
+    public void ChangeSprintDuration(float buff)
+    {
+        SprintDuration += SprintDuration * buff;
+        //Debug.Log(SprintDuration);
+    }
+    public void ChangeSprint(float buff)
+    {
+        Sprint += (int)(Sprint * buff);
+        //Debug.Log(Sprint);
     }
     /// <summary>
     /// Metodo que se encarga de saber cuanta energia queda

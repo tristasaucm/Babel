@@ -114,6 +114,12 @@ public class UniversalHealth : MonoBehaviour
     {
         return Health;
     }
+    public void ChangeHealth(float buff)
+    {
+        float extraHealth = buff * Health;
+        Health += (int)extraHealth;
+        Debug.Log(Health);
+    }
     /// <summary>
     /// Metodo que indica si somos el player
     /// </summary>
