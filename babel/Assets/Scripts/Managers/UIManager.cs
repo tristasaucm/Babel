@@ -36,6 +36,10 @@ public class UIManager : MonoBehaviour
     /// Gameobject del player
     /// </summary>
     [SerializeField] private GameObject Player;
+    /// <summary>
+    /// Panel de muerte 
+    /// </summary>
+    [SerializeField] private GameObject PanelDeath;
 
 
     #endregion
@@ -79,6 +83,7 @@ public class UIManager : MonoBehaviour
         _playerEnergy = Player.GetComponent<PlayerMovement>();
         _playerHealth = Player.GetComponent<UniversalHealth>();
         _maxHealth = _playerHealth.GetHealth();
+        PanelDeath.SetActive(false);
     }
 
     /// <summary>.
@@ -117,7 +122,10 @@ public class UIManager : MonoBehaviour
        float energy = _playerEnergy.GetEnergy();
        Energy.fillAmount = energy;
         Life.fillAmount = health / _maxHealth;
-       
+       if(health <= 0)
+        {
+            PanelDeath.SetActive(true);
+        }
     }
     #endregion   
 
